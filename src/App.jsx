@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { useState, useEffect } from "react"
 import { Route, Routes } from "react-router"
 import Header from "./components/Header"
@@ -6,6 +5,8 @@ import Register from "./pages/Register"
 import SignIn from "./pages/SignIn"
 import Home from "./pages/Home"
 import "./App.css"
+import Hotels from "./pages/Hotels"
+import AddHotel from "./pages/AddHotel"
 import { CheckSession } from "./services/Auth" //CheckSession user to check user if it is singin
 const App = () => {
   const [user, setUser] = useState(null)
@@ -37,24 +38,8 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/signin" element={<SignIn setUser={setUser} />} />
           <Route path="/register" element={<Register />} />
-=======
-import { useState, useEffect } from 'react'
-import './App.css'
-import Header from './components/Header'
-import Home from './pages/Home'
-import { Route, Routes } from 'react-router-dom'
-import Hotels from './pages/Hotels'
-import AddHotel from './pages/AddHotel'
-function App() {
-  return (
-    <div className="App">
-      <Header />
-      <main>
-        <Routes>
-          <Route path="/" element={<Home />} />
           <Route path="/hotels" element={<Hotels />} />
           <Route path="/add-hotel" element={<AddHotel />} />
->>>>>>> a3c5b7f9e061bf8d0bbe388297e18ba5ab202a59
         </Routes>
       </main>
     </div>
