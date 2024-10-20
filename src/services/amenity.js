@@ -2,13 +2,14 @@ import Client from "./api";
 
 const API_URL = '/amenities';
 
-export const addAmenity = async (amenity) => {
-  console.log('Received body:', amenity);
+export const addAmenity = async (formData) => {
   try {
-    const reposne = await Client.post(API_URL, amenity);
-    return reposne.data;
+      const response = await Client.post(API_URL, formData, {
+          headers: { 'Content-Type': 'multipart/form-data' },
+      });
+      return response.data;
   } catch (error) {
-    throw new Error(error.reposne.data.message || 'Error adding amenity')
+      throw new Error(error.response.data.message || 'Error adding amenity');
   }
 };
 
