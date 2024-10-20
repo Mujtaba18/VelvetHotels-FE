@@ -33,16 +33,7 @@ const Amenity = () => {
 
     return (
         <div>
-            <h2>Amenities</h2>
-            <ul>
-                {amenities.map((amenity) => (
-                    <li key={amenity._id}>
-                        <h3>{amenity.amenity_name}</h3>
-                        <p>{amenity.amenity_description}</p>
-                        <img src={amenity.amenity_icon} alt={amenity.amenity_name} />
-                    </li>
-                ))}
-            </ul>
+            <h2>Add Amenity</h2>
             <form onSubmit={handleAddAmenity}>
                 <input
                     type="text"
@@ -66,6 +57,16 @@ const Amenity = () => {
                 />
                 <button type="submit">Add Amenity</button>
             </form>
+            <h2>Amenities</h2>
+            <div>
+                {amenities.map((amenity) => (
+                    <div key={amenity._id}>
+                        <h3>{amenity.amenity_name}</h3>
+                        <p>{amenity.amenity_description}</p>
+                        <img src={amenity.amenity_icon} alt={amenity.amenity_name} />
+                    </div>
+                ))}
+            </div>
         </div>
     );
 };

@@ -15,7 +15,7 @@ export const addAmenity = async (amenity) => {
 export const getAmenities = async () => {
   try {
     const response = await Client.get(API_URL);
-    return reposne.data;
+    return response.data;
   } catch (error) {
     throw new Error(error.response.data.message || 'Error retrieving amenities');
   }
