@@ -22,9 +22,9 @@ const Header = ({ user, handleLogOut }) => {
         <nav>
           <h3>Welcome {user.name}! Admin</h3>
           <Link to="/">Home</Link>
-          <Link to="/">Add Hotel</Link>
+          <Link to="/hotels">Hotels</Link>
+          <Link to="/add-hotel">Add Hotel</Link>
           <Link to="/">Profile</Link>
-
           <Link onClick={handleLogOut} to="/">
             Sign Out
           </Link>
@@ -50,9 +50,6 @@ const Header = ({ user, handleLogOut }) => {
           LOGO
         </div>
       </Link>
-      <Link to="/">Home</Link>
-      <Link to="/hotels">Hotels</Link>
-      <Link to="/add-hotel">Add Hotel</Link>
       {userOptions}
     </header>
   )
