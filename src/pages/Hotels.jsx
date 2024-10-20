@@ -19,6 +19,15 @@ const Hotels = () => {
     fetchHotels()
   }, [])
 
+  // Function to handle sorting
+  const sortedHotels = [...hotels].sort((a, b) => {
+    if (sortOrder === "low-high") {
+      return a.hotel_price - b.hotel_price // Sort by price low to high
+    } else {
+      return b.hotel_price - a.hotel_price // Sort by price high to low
+    }
+  })
+
   return (
     <div>
       <h1>Hotels</h1>
