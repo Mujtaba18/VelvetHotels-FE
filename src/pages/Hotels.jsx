@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import axios from "axios"
 const Hotels = () => {
   const [hotels, setHotels] = useState([])
+  const [sortOrder, setSortOrder] = useState("low-high") //useState to handle price sort
 
   useEffect(() => {
     const fetchHotels = async () => {
@@ -21,9 +22,20 @@ const Hotels = () => {
   return (
     <div>
       <h1>Hotels</h1>
-      {hotels.length > 0 ? (
+      <div>
+        <label htmlFor="sortOrder">Sort by price:</label>
+        <select
+          id="sortOrder"
+          value={sortOrder}
+          onChange={(e) => setSortOrder(e.target.value)}
+        >
+          <option value="low-high">Low to High</option>
+          <option value="high-low">High to Low</option>
+        </select>
+      </div>
+      {sortedHotels.length > 0 ? (
         <ul>
-          {hotels.map((hotel) => (
+          {sortedHotels.map((hotel) => (
             <li key={hotel._id}>
               <h2>{hotel.hotel_name}</h2>
               <img src={hotel.hotel_image} alt={hotel.hotel_name} width="300" />
