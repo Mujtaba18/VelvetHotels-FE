@@ -8,6 +8,7 @@ import "./App.css"
 import Hotels from "./pages/Hotels"
 import AddHotel from "./pages/AddHotel"
 import { CheckSession } from "./services/Auth" //CheckSession user to check user if it is singin
+import Amenity from "./components/Amenity"
 const App = () => {
   const [user, setUser] = useState(null)
 
@@ -38,8 +39,12 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/signin" element={<SignIn setUser={setUser} />} />
           <Route path="/register" element={<Register />} />
+<<<<<<< HEAD
           <Route path="/hotels" element={<Hotels />} />
           <Route path="/add-hotel" element={<AddHotel />} />
+=======
+          <Route path="/amenities" element={<Amenity />} />
+>>>>>>> fbccfedead27d5a33439f4f69f74cda2d0c1b006
         </Routes>
       </main>
     </div>

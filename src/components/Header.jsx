@@ -25,6 +25,11 @@ const Header = ({ user, handleLogOut }) => {
           <Link to="/hotels">Hotels</Link>
           <Link to="/add-hotel">Add Hotel</Link>
           <Link to="/">Profile</Link>
+<<<<<<< HEAD
+=======
+          <Link to="/amenities">Amenities</Link>
+
+>>>>>>> fbccfedead27d5a33439f4f69f74cda2d0c1b006
           <Link onClick={handleLogOut} to="/">
             Sign Out
           </Link>
