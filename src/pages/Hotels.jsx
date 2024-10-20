@@ -1,13 +1,21 @@
-import React, { useEffect, useState } from 'react'
-
+import React, { useEffect, useState } from "react"
+import axios from "axios"
 const Hotels = () => {
   const [hotels, setHotels] = useState([])
 
   useEffect(() => {
-    fetch('http://localhost:3001/hotels/getHotels')
-      .then((res) => res.json())
-      .then((data) => setHotels(data))
-      .catch((error) => console.error('Error fetching hotels:', error))
+    const fetchHotels = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:3001/hotels/getHotels"
+        )
+        setHotels(response.data)
+      } catch (error) {
+        console.error("Error fetching hotels:", error)
+      }
+    }
+
+    fetchHotels()
   }, [])
 
   return (
