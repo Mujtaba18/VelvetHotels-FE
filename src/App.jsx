@@ -1,17 +1,41 @@
-import { useState, useEffect } from 'react'
-import './App.css'
-import Header from './components/Header'
-import Home from './pages/Home'
-import { Route, Routes } from 'react-router-dom'
+import { useState, useEffect } from "react"
+import { Route, Routes } from "react-router"
+import Header from "./components/Header"
+import Register from "./pages/Register"
+import SignIn from "./pages/SignIn"
+import Home from "./pages/Home"
+import "./App.css"
+import { CheckSession } from "./services/Auth" //CheckSession user to check user if it is singin
+const App = () => {
+  const [user, setUser] = useState(null)
 
-function App() {
+  const handleLogOut = () => {
+    //Reset all auth related state and clear localStorage
+    setUser(null)
+    localStorage.clear()
+  }
+  const checkToken = async () => {
+    //If a token exists, sends token to localStorage to persist logged in user
+    const user = await CheckSession()
+    console.log(user) // Log the user object to see its structure
 
+    setUser(user)
+  }
+  useEffect(() => {
+    const token = localStorage.getItem("token")
+    // Check if token exists before requesting to validate the token
+    if (token) {
+      checkToken()
+    }
+  }, [])
   return (
-    <div className='App'>
-      <Header />
+    <div className="App">
+      <Header user={user} handleLogOut={handleLogOut} />
       <main>
         <Routes>
-          <Route path='/' element={<Home />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/signin" element={<SignIn setUser={setUser} />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </main>
     </div>
