@@ -24,6 +24,7 @@ const Header = ({ user, handleLogOut }) => {
           <Link to="/">Home</Link>
           <Link to="/">Add Hotel</Link>
           <Link to="/">Profile</Link>
+          <Link to="/amenities">Amenities</Link>
 
           <Link onClick={handleLogOut} to="/">
             Sign Out

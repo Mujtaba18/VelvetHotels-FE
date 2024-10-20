@@ -6,6 +6,7 @@ import SignIn from "./pages/SignIn"
 import Home from "./pages/Home"
 import "./App.css"
 import { CheckSession } from "./services/Auth" //CheckSession user to check user if it is singin
+import Amenity from "./components/Amenity"
 const App = () => {
   const [user, setUser] = useState(null)
 
@@ -36,6 +37,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/signin" element={<SignIn setUser={setUser} />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/amenities" element={<Amenity />} />
         </Routes>
       </main>
     </div>
