@@ -60,11 +60,12 @@ const AddHotel = () => {
     try {
       const response = await axios.post(
         "http://localhost:3001/hotels/addHotel",
-        newHotel
+        newHotel, {
+          headers: { 'Content-Type': 'multipart/form-data' },
+      }
       )
       console.log("Hotel added:", response.data)
 
-      // Redirect to the hotel details page after adding the hotel
       const hotelId = response.data._id
 
       navigate(`/hotels`)
@@ -123,11 +124,10 @@ const AddHotel = () => {
         max="400"
       />
 
-      <label>Hotel Image URL:</label>
+      <label>Hotel Image:</label>
       <input
-        type="text"
-        value={hotelImage}
-        onChange={(e) => setHotelImage(e.target.value)}
+        type="file"
+        onChange={(e) => setHotelImage(e.target.files[0])}
       />
 
       <h3>Select Amenities:</h3>

@@ -18,7 +18,7 @@ const Hotels = () => {
           {hotels.map((hotel) => (
             <div key={hotel._id}>
               <h2>{hotel.hotel_name}</h2>
-              <img src={`${hotel.hotel_image}`} alt={hotel.hotel_name} width="300" />
+              <img src={`http://localhost:3001/${hotel.hotel_image}`} alt={hotel.hotel_name} width="300" />
               <p>{hotel.hotel_location}</p>
               <p>{hotel.hotel_description}</p>
               <p>Price: ${hotel.hotel_price}</p>
