@@ -10,7 +10,7 @@ const Header = ({ user, handleLogOut }) => {
       userOptions = (
         <nav>
           <Link to="/">Home</Link>
-          <Link to="/">Hotels</Link>
+          <Link to="/hotels">Hotels</Link>
           <Link to="/">My Booking</Link>
           <Link onClick={handleLogOut} to="/">
             Sign Out
