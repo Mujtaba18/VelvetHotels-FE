@@ -1,92 +1,140 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
 const AddHotel = () => {
-  const [hotelData, setHotelData] = useState({
-    hotel_name: '',
-    hotel_location: '',
-    hotel_description: '',
-    hotel_price: '',
-    hotel_rating: '',
-    hotel_image: ''
-  })
+  const [hotelName, setHotelName] = useState('')
+  const [hotelLocation, setHotelLocation] = useState('')
+  const [hotelDescription, setHotelDescription] = useState('')
+  const [hotelPrice, setHotelPrice] = useState(0)
+  const [hotelRating, setHotelRating] = useState(0)
+  const [hotelImage, setHotelImage] = useState('')
+  const [amenities, setAmenities] = useState([])
+  const [selectedAmenities, setSelectedAmenities] = useState([])
+
+  // Handle form input change
   const navigate = useNavigate()
 
-  const handleChange = (e) => {
-    setHotelData({ ...hotelData, [e.target.name]: e.target.value })
+  // Fetch amenities from the backend
+  useEffect(() => {
+    const fetchAmenities = async () => {
+      try {
+        const response = await axios.get(
+          'http://localhost:3001/hotels/getAmenities'
+        )
+        setAmenities(response.data)
+      } catch (error) {
+        console.error('Error fetching amenities:', error)
+      }
+    }
+
+    fetchAmenities()
+  }, [])
+
+  // Handle checkbox toggle
+  const handleAmenityToggle = (amenityId) => {
+    if (selectedAmenities.includes(amenityId)) {
+      // Remove amenity if already selected
+      setSelectedAmenities(selectedAmenities.filter((id) => id !== amenityId))
+    } else {
+      // Add amenity if not selected
+      setSelectedAmenities([...selectedAmenities, amenityId])
+    }
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+
+    const newHotel = {
+      hotel_name: hotelName,
+      hotel_location: hotelLocation,
+      hotel_description: hotelDescription,
+      hotel_price: hotelPrice,
+      hotel_rating: hotelRating,
+      hotel_image: hotelImage,
+      amenities: selectedAmenities
+    }
+
     try {
       const response = await axios.post(
         'http://localhost:3001/hotels/addHotel',
-        hotelData
+        newHotel
       )
       console.log('Hotel added:', response.data)
 
-      navigate('/hotels')
+      // Redirect to the hotel details page after adding the hotel
+      const hotelId = response.data._id
+
+      navigate(`/hotels`)
     } catch (error) {
       console.error('Error adding hotel:', error)
     }
   }
 
   return (
-    <div>
-      <h2>Add a New Hotel</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="hotel_name"
-          value={hotelData.hotel_name}
-          onChange={handleChange}
-          placeholder="Hotel Name"
-          required
-        />
-        <input
-          type="text"
-          name="hotel_location"
-          value={hotelData.hotel_location}
-          onChange={handleChange}
-          placeholder="Hotel Location"
-          required
-        />
-        <input
-          type="text"
-          name="hotel_description"
-          value={hotelData.hotel_description}
-          onChange={handleChange}
-          placeholder="Hotel Description"
-        />
-        <input
-          type="number"
-          name="hotel_price"
-          value={hotelData.hotel_price}
-          onChange={handleChange}
-          placeholder="Hotel Price"
-          required
-        />
-        <input
-          type="number"
-          name="hotel_rating"
-          value={hotelData.hotel_rating}
-          onChange={handleChange}
-          placeholder="Hotel Rating"
-          min="0"
-          max="5"
-        />
-        <input
-          type="text"
-          name="hotel_image"
-          value={hotelData.hotel_image}
-          onChange={handleChange}
-          placeholder="Hotel Image URL"
-          required
-        />
-        <button type="submit">Add Hotel</button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <label>Hotel Name:</label>
+      <input
+        type="text"
+        value={hotelName}
+        onChange={(e) => setHotelName(e.target.value)}
+        required
+      />
+
+      <label>Hotel Location:</label>
+      <input
+        type="text"
+        value={hotelLocation}
+        onChange={(e) => setHotelLocation(e.target.value)}
+        required
+      />
+
+      <label>Hotel Description:</label>
+      <textarea
+        value={hotelDescription}
+        onChange={(e) => setHotelDescription(e.target.value)}
+      />
+
+      <label>Hotel Price:</label>
+      <input
+        type="number"
+        value={hotelPrice}
+        onChange={(e) => setHotelPrice(e.target.value)}
+        required
+      />
+
+      <label>Hotel Rating:</label>
+      <input
+        type="number"
+        value={hotelRating}
+        onChange={(e) => setHotelRating(e.target.value)}
+        min="0"
+        max="5"
+      />
+
+      <label>Hotel Image URL:</label>
+      <input
+        type="text"
+        value={hotelImage}
+        onChange={(e) => setHotelImage(e.target.value)}
+      />
+
+      <h3>Select Amenities:</h3>
+      {amenities?.map((amenity) => (
+        <div key={amenity._id}>
+          <label>
+            <input
+              type="checkbox"
+              checked={selectedAmenities.includes(amenity._id)}
+              onChange={() => handleAmenityToggle(amenity._id)}
+            />
+            {amenity.amenity_name}
+          </label>
+        </div>
+      ))}
+
+      <button type="submit">Add Hotel</button>
+    </form>
   )
 }
 
