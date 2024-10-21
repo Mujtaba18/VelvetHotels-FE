@@ -8,7 +8,7 @@ const AddHotel = () => {
   const [hotelDescription, setHotelDescription] = useState('')
   const [hotelPrice, setHotelPrice] = useState(0)
   const [hotelRating, setHotelRating] = useState(0)
-  const [hotelImage, setHotelImage] = useState('')
+  const [hotelImage, setHotelImage] = useState(null)
   const [amenities, setAmenities] = useState([])
   const [selectedAmenities, setSelectedAmenities] = useState([])
 
