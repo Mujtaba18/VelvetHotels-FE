@@ -22,6 +22,8 @@ const Hotels = () => {
               <p>{hotel.hotel_location}</p>
               <p>{hotel.hotel_description}</p>
               <p>Price: ${hotel.hotel_price}</p>
+              <p>Rooms: {hotel.hotel_rooms}</p>
+              <p>Stars: {hotel.hotel_stars}</p>
               <p>Rating: {hotel.hotel_rating}</p>
             </div>
           ))}

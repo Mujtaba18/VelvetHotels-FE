@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import React, { useState, useEffect } from "react"
+import axios from "axios"
+import { useNavigate } from "react-router-dom"
 
 const AddHotel = () => {
-  const [hotelName, setHotelName] = useState('')
-  const [hotelLocation, setHotelLocation] = useState('')
-  const [hotelDescription, setHotelDescription] = useState('')
+  const [hotelName, setHotelName] = useState("")
+  const [hotelLocation, setHotelLocation] = useState("")
+  const [hotelDescription, setHotelDescription] = useState("")
   const [hotelPrice, setHotelPrice] = useState(0)
-  const [hotelRating, setHotelRating] = useState(0)
+  const [hotelStars, setHotelStars] = useState(0)
+  const [hotelRooms, setHotelRooms] = useState(0)
   const [hotelImage, setHotelImage] = useState(null)
   const [amenities, setAmenities] = useState([])
   const [selectedAmenities, setSelectedAmenities] = useState([])
@@ -20,11 +21,11 @@ const AddHotel = () => {
     const fetchAmenities = async () => {
       try {
         const response = await axios.get(
-          'http://localhost:3001/hotels/getAmenities'
+          "http://localhost:3001/hotels/getAmenities"
         )
         setAmenities(response.data)
       } catch (error) {
-        console.error('Error fetching amenities:', error)
+        console.error("Error fetching amenities:", error)
       }
     }
 
@@ -50,24 +51,25 @@ const AddHotel = () => {
       hotel_location: hotelLocation,
       hotel_description: hotelDescription,
       hotel_price: hotelPrice,
-      hotel_rating: hotelRating,
+      hotel_stars: hotelStars,
+      hotel_rooms: hotelRooms,
       hotel_image: hotelImage,
-      amenities: selectedAmenities
+      amenities: selectedAmenities,
     }
 
     try {
       const response = await axios.post(
-        'http://localhost:3001/hotels/addHotel',
+        "http://localhost:3001/hotels/addHotel",
         newHotel
       )
-      console.log('Hotel added:', response.data)
+      console.log("Hotel added:", response.data)
 
       // Redirect to the hotel details page after adding the hotel
       const hotelId = response.data._id
 
       navigate(`/hotels`)
     } catch (error) {
-      console.error('Error adding hotel:', error)
+      console.error("Error adding hotel:", error)
     }
   }
 
@@ -103,13 +105,22 @@ const AddHotel = () => {
         required
       />
 
-      <label>Hotel Rating:</label>
+      <label>Hotel Stars:</label>
       <input
         type="number"
-        value={hotelRating}
-        onChange={(e) => setHotelRating(e.target.value)}
+        value={hotelStars}
+        onChange={(e) => setHotelStars(e.target.value)}
         min="0"
         max="5"
+      />
+
+      <label>Hotel Rooms:</label>
+      <input
+        type="number"
+        value={hotelRooms}
+        onChange={(e) => setHotelRooms(e.target.value)}
+        min="1"
+        max="400"
       />
 
       <label>Hotel Image URL:</label>
