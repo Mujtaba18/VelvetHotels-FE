@@ -66,7 +66,7 @@ const Hotels = () => {
         <div className="card-flex">
           {sortedHotels.map((hotel) => (
             <Link
-              to={`/hotels/detalis/${hotel._id}`}
+              to={`/hotels/details/${hotel._id}`}
               key={hotel._id}
               className="link-hotel"
             >
