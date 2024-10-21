@@ -108,7 +108,7 @@ const Profile = ({ user, setUser }) => {
             <option value="female">Female</option>
           </select>
           <input type="file" onChange={handlePicChange} />
-          <button onClick={handleSave}>Save. </button>
+          <button onClick={handleSave}>Save </button>
           <button onClick={() => navigate("/profile")}>go back</button>
         </>
       ) : (
