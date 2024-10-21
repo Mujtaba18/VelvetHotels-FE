@@ -12,6 +12,7 @@ const Header = ({ user, handleLogOut }) => {
           <Link to="/">Home</Link>
           <Link to="/">Hotels</Link>
           <Link to="/">My Booking</Link>
+          <Link to={`/profile/${user.id}`}>Profile</Link>
           <Link onClick={handleLogOut} to="/">
             Sign Out
           </Link>
@@ -23,8 +24,7 @@ const Header = ({ user, handleLogOut }) => {
           <h3>Welcome {user.name}! Admin</h3>
           <Link to="/">Home</Link>
           <Link to="/">Add Hotel</Link>
-          <Link to="/">Profile</Link>
-
+          <Link to={`/profile/${user.id}`}>Profile</Link>
           <Link onClick={handleLogOut} to="/">
             Sign Out
           </Link>
