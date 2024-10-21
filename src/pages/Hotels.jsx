@@ -21,10 +21,18 @@ const Hotels = () => {
 
   // Function to handle sorting
   const sortedHotels = [...hotels].sort((a, b) => {
-    if (sortOrder === "low-high") {
-      return a.hotel_price - b.hotel_price // Sort by price low to high
+    if (sortBy === "price") {
+      // Compare between them and sort based on the result
+      // In case result is negative (-), it means 'a' should come before 'b' in the sorted order.
+      // In case result is positive (+), it means 'b' should come before 'a' in the sorted order.
+      return sortOrder === "low-high"
+        ? a.hotel_price - b.hotel_price // Sort by price low to high
+        : b.hotel_price - a.hotel_price // Sort by price high to low
     } else {
-      return b.hotel_price - a.hotel_price // Sort by price high to low
+      // sortBy is rate
+      return sortOrder === "low-high"
+        ? a.hotel_rating - b.hotel_rating
+        : b.hotel_rating - a.hotel_rating
     }
   })
 
