@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react"
 import axios from "axios"
 const Hotels = () => {
   const [hotels, setHotels] = useState([])
-  const [sortOrder, setSortOrder] = useState("low-high") //useState to handle sort
-  const [sortBy, setSortBy] = useState("price") // State to manage what to sort
+  const [sortOrder, setSortOrder] = useState("low-high") //useState to handle sort order
+  const [sortBy, setSortBy] = useState("price") // useState to manage what to sort
   useEffect(() => {
     const fetchHotels = async () => {
       try {
@@ -45,7 +45,7 @@ const Hotels = () => {
         <select
           id="sortBy"
           value={sortBy}
-          onChange={(e) => setSortBy(e.target.value)} // Update sort criteria
+          onChange={(e) => setSortBy(e.target.value)} //handel change the sort
         >
           <option value="price">Price</option>
           <option value="rating">Rating</option>
@@ -54,7 +54,7 @@ const Hotels = () => {
         <select
           id="sortOrder"
           value={sortOrder}
-          onChange={(e) => setSortOrder(e.target.value)} // Update sort order
+          onChange={(e) => setSortOrder(e.target.value)} //handel change the order
         >
           <option value="low-high">Low to High</option>
           <option value="high-low">High to Low</option>
