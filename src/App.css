@@ -95,7 +95,8 @@ nav a:hover {
   gap: 0 10px;
 }
 
-.amenity-list {
+.amenity-list,
+.amenity-list-details {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -103,6 +104,9 @@ nav a:hover {
   gap: 0 15px;
   max-width: 500px;
   height: 100px;
+}
+.amenity-list-details {
+  max-width: 100%;
 }
 
 .amenity-card {

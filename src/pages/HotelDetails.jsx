@@ -7,6 +7,8 @@ const HotelDetails = () => {
   //
   const { hotelId } = useParams()
   const [HotelDetails, setHotelDetails] = useState([])
+  const [Hotelamenities, setHotelamenities] = useState([])
+
   const [HotelName, setHotel] = useState("")
 
   useEffect(() => {
@@ -16,7 +18,9 @@ const HotelDetails = () => {
           `http://localhost:3001/hotels/details/${hotelId}`
         )
         setHotelDetails(response.data) // store data in HotelDetails
-        console.log(response)
+        setHotelamenities(response.data.amenities) // store Hotel amenities
+
+        console.log(response.data.amenities)
       } catch (error) {
         throw error
       }
@@ -79,6 +83,24 @@ const HotelDetails = () => {
           <section className="hotel-description">
             <h3>Description</h3>
             <p>{HotelDetails.hotel_description}</p>
+          </section>
+
+          <section>
+            <h3>Hotel Amenities </h3>
+
+            <div className="amenity-list-details">
+              {Hotelamenities.map((amenity) => (
+                <div className="amenity-card" key={amenity._id}>
+                  <img
+                    src={`http://localhost:3001/${amenity.amenity_icon}`}
+                    alt="AmenityIcon"
+                    width="30px"
+                    height="30px"
+                  />
+                  <p>{amenity.amenity_name}</p>
+                </div>
+              ))}
+            </div>
           </section>
 
           <section className="hotel-booking">
