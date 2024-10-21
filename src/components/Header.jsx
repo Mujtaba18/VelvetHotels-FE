@@ -5,7 +5,7 @@ const Header = () => {
     <div>
       <Link to="/">Home</Link>
       <Link to="/hotels">Hotels</Link>
-      <Link to="/add-hotel">Add Hotel</Link>
+      <Link to="/addHotel">Add Hotel</Link>
     </div>
   )
 }

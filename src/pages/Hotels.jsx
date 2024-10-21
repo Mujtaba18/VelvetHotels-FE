@@ -1,14 +1,31 @@
 import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 
 const Hotels = () => {
   const [hotels, setHotels] = useState([])
 
   useEffect(() => {
-    fetch('http://localhost:3001/hotels/getHotels')
-      .then((res) => res.json())
-      .then((data) => setHotels(data))
-      .catch((error) => console.error('Error fetching hotels:', error))
+    fetchHotels()
   }, [])
+
+  const fetchHotels = async () => {
+    try {
+      const response = await axios.get('http://localhost:3001/hotels/getHotels')
+      setHotels(response.data)
+    } catch (error) {
+      console.error('Error fetching hotels:', error)
+    }
+  }
+
+  // Handle hotel deletion
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:3001/hotels/deleteHotel/${id}`)
+      fetchHotels() // Re-fetch the updated list after deletion
+    } catch (error) {
+      console.error('Error deleting hotel:', error)
+    }
+  }
 
   return (
     <div>
@@ -23,6 +40,7 @@ const Hotels = () => {
               <p>{hotel.hotel_description}</p>
               <p>Price: ${hotel.hotel_price}</p>
               <p>Rating: {hotel.hotel_rating}</p>
+              <button onClick={() => handleDelete(hotel._id)}>Delete</button>
             </li>
           ))}
         </ul>
