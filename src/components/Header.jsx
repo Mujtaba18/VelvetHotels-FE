@@ -10,7 +10,7 @@ const Header = ({ user, handleLogOut }) => {
         <nav>
           <h3>Welcome {user.name}!</h3>
           <Link to="/">Home</Link>
-          <Link to="/">Hotels</Link>
+          <Link to="/hotels">Hotels</Link>
           <Link to="/">My Booking</Link>
           <Link onClick={handleLogOut} to="/">
             Sign Out

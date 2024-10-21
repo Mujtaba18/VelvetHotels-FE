@@ -40,3 +40,45 @@
 .read-the-docs {
   color: #888;
 }
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 20px;
+}
+
+.card-flex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.card-hotel {
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  padding: 20px;
+  flex: 1 1 250px;
+  max-width: 300px;
+  transition: transform 0.2s;
+}
+
+.card-hotel:hover {
+  transform: scale(1.04);
+}
+
+@media (max-width: 600px) {
+  .card-hotel {
+    flex-basis: 100%;
+  }
+}
+
+.link-hotel {
+  text-decoration: none;
+  color: black;
+}

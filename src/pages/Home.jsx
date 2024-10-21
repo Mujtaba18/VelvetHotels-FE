@@ -37,18 +37,19 @@ const Home = () => {
         <button onClick={() => navigate("/signin")}>
           Click Here To Get Started
         </button>
-
         <div>
           {hotels.length > 0 ? (
-            hotels.map((hotel) => (
-              <div key={hotel._id} className="hotel-card">
-                <h2>{hotel.hotel_name}</h2>
-                <p>{hotel.hotel_description}</p>
-                <p>{hotel.hotel_location}</p>
-                <p>Price: ${hotel.hotel_price}</p>
-                <p>Rating: {hotel.hotel_rating}</p>
-              </div>
-            ))
+            <div className="card-flex">
+              {hotels.map((hotel) => (
+                <div key={hotel._id} className="card-hotel">
+                  <h2>{hotel.hotel_name}</h2>
+                  <p>{hotel.hotel_description}</p>
+                  <p>{hotel.hotel_location}</p>
+                  <p>Price: ${hotel.hotel_price}</p>
+                  <p>Rating: {hotel.hotel_rating}</p>
+                </div>
+              ))}
+            </div>
           ) : (
             <p>No data available</p> // Message when no hotels are found
           )}

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import axios from "axios"
+import { Link } from "react-router-dom"
 const Hotels = () => {
   const [hotels, setHotels] = useState([])
   const [sortOrder, setSortOrder] = useState("low-high") //useState to handle sort order
@@ -60,19 +61,30 @@ const Hotels = () => {
           <option value="high-low">High to Low</option>
         </select>
       </div>
+
       {sortedHotels.length > 0 ? (
-        <ul>
+        <div className="card-flex">
           {sortedHotels.map((hotel) => (
-            <li key={hotel._id}>
-              <h2>{hotel.hotel_name}</h2>
-              <img src={hotel.hotel_image} alt={hotel.hotel_name} width="300" />
-              <p>{hotel.hotel_location}</p>
-              <p>{hotel.hotel_description}</p>
-              <p>Price: ${hotel.hotel_price}</p>
-              <p>Rating: {hotel.hotel_rating}</p>
-            </li>
+            <Link
+              to={`/hotels/detalis/${hotel._id}`}
+              key={hotel._id}
+              className="link-hotel"
+            >
+              <div key={hotel._id} className="card-hotel">
+                <h2>{hotel.hotel_name}</h2>
+                <img
+                  src={hotel.hotel_image}
+                  alt={hotel.hotel_name}
+                  width="300"
+                />
+                <p>{hotel.hotel_location}</p>
+                <p>{hotel.hotel_description}</p>
+                <p>Price: ${hotel.hotel_price}</p>
+                <p>Rating: {hotel.hotel_rating}</p>
+              </div>
+            </Link>
           ))}
-        </ul>
+        </div>
       ) : (
         <p>No hotels found.</p>
       )}
