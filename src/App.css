@@ -50,6 +50,11 @@ nav a:hover {
   gap: 17px;
 }
 
+.hotels-list a {
+  text-decoration: none;
+  color: #323232;
+}
+
 .hotels-card {
   background-color: white;
   border: 2px solid #bfafa5;
