@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  background-color: #DDD0C8;
+  background-color: #ddd0c8;
 
   text-align: center;
   font-family: DM Sans, sans-serif;
@@ -110,3 +110,51 @@ nav a:hover {
   align-items: center;
 }
 
+/* hotle details CSS */
+.hotel-details {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.hotel-details h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.hotel-details img {
+  width: 100%;
+  max-width: 350px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+section {
+  margin-bottom: 20px;
+}
+
+h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+p {
+  margin: 5px 0;
+  line-height: 1.6;
+  text-align: left; /* Align text to the left */
+}
+
+.hotel-booking,
+.hotel-reviews {
+  text-align: center;
+}
+
+.hotel-reviews {
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
+}
+/* END */
