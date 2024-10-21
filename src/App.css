@@ -55,7 +55,16 @@ nav a:hover {
   border: 2px solid #bfafa5;
   border-radius: 4px;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
+  align-items: center;
+}
+
+.hotels-img-info {
+  display: flex;
+  justify-content: space-between;
+
+  border-bottom: 2px solid #bfafa5;
 }
 
 .hotels-img {
@@ -79,5 +88,20 @@ nav a:hover {
   justify-content: center;
   width: 200px;
   gap: 0 10px;
+}
+
+.amenity-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0 15px;
+  max-width: 500px;
+  height: 100px;
+}
+
+.amenity-card {
+  display: flex;
+  align-items: center;
 }
 
