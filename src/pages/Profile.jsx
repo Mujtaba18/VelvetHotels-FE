@@ -172,7 +172,9 @@ const Profile = ({ user, setUser }) => {
               </button>
               <button
                 type="button"
-                onClick={() => navigate("/profile")}
+                onClick={() => {
+                  setEditMode(false)
+                }}
                 className="btn btn-secondary ms-2"
               >
                 Go Back
