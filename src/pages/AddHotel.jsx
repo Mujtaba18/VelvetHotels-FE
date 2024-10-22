@@ -12,6 +12,7 @@ const AddHotel = () => {
   const [hotelImage, setHotelImage] = useState(null)
   const [amenities, setAmenities] = useState([])
   const [selectedAmenities, setSelectedAmenities] = useState([])
+  const [hotelImages, setHotelImages] = useState([])
 
   const navigate = useNavigate()
 
@@ -41,21 +42,24 @@ const AddHotel = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    const newHotel = {
-      hotel_name: hotelName,
-      hotel_location: hotelLocation,
-      hotel_description: hotelDescription,
-      hotel_price: hotelPrice,
-      hotel_stars: hotelStars,
-      hotel_rooms: hotelRooms,
-      hotel_image: hotelImage,
-      amenities: selectedAmenities,
-    }
+    const formData = new FormData();
+    formData.append('hotel_name', hotelName);
+    formData.append('hotel_location', hotelLocation);
+    formData.append('hotel_description', hotelDescription);
+    formData.append('hotel_price', hotelPrice);
+    formData.append('hotel_stars', hotelStars);
+    formData.append('hotel_rooms', hotelRooms);
+    formData.append('hotel_image', hotelImage);
+    selectedAmenities.forEach((amenity) => formData.append('amenities', amenity));
+  
+    hotelImages.forEach((image) => {
+      formData.append('hotel_images', image);
+    });
 
     try {
       const response = await axios.post(
         "http://localhost:3001/hotels/addHotel",
-        newHotel,
+        formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
         }
@@ -144,6 +148,16 @@ const AddHotel = () => {
             type="file"
             className="form-control-file"
             onChange={(e) => setHotelImage(e.target.files[0])}
+          />
+        </div>
+
+        <div className="form-group mb-3">
+          <label>Additional Hotel Images:</label>
+          <input
+            type="file"
+            className="form-control-file"
+            multiple
+            onChange={(e) => setHotelImages([...e.target.files])}
           />
         </div>
 
