@@ -99,8 +99,8 @@ const HotelDetails = ({ user }) => {
                   <img
                     src={`http://localhost:3001/${amenity.amenity_icon}`}
                     alt="AmenityIcon"
-                    width="30px"
-                    height="30px"
+                    width="40px"
+                    height="40px"
                   />
                   <p>{amenity.amenity_name}</p>
                 </div>
@@ -130,6 +130,7 @@ const HotelDetails = ({ user }) => {
                     <strong>Comment:</strong>{" "}
                     {review.comment || "No comment provided."}
                   </p>
+                  <hr/>
                 </div>
               ))
             ) : (
