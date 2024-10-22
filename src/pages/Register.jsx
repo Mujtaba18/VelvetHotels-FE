@@ -80,6 +80,7 @@ const Register = () => {
               required
             />
           </div>
+
           <button
             disabled={
               !formValues.email ||
