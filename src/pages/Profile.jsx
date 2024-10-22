@@ -73,55 +73,137 @@ const Profile = ({ user, setUser }) => {
   }
 
   return user ? (
-    <div className="img-wrapper">
-      <h1>Profile</h1>
-      <img
-        src={`http://localhost:3001/uploads${user.profile_picture}`}
-        alt={user.profile_picture}
-        style={{ width: "150px", height: "150px", borderRadius: "50%" }}
-      />
-      {editMode ? (
-        <>
-          <input
-            type="text"
-            name="name"
-            value={userData.name}
-            onChange={handleChange}
-            placeholder="Name"
+    <>
+      <div className="text-center mb-4">
+        <h1>Profile</h1>
+      </div>
+      <div className="container card mt-4">
+        <div className="d-flex justify-content-center my-4">
+          <img
+            src={`http://localhost:3001/uploads${user.profile_picture}`}
+            alt={user.profile_picture}
+            className="img-fluid rounded-circle"
+            style={{ width: "150px", height: "150px" }}
           />
-          <input
-            type="email"
-            name="email"
-            value={userData.email}
-            onChange={handleChange}
-            placeholder="Email"
-          />
-          <input
-            type="number"
-            name="age"
-            value={userData.age}
-            onChange={handleChange}
-            placeholder="Age"
-          />
-          <select name="gender" value={userData.gender} onChange={handleChange}>
-            <option value="">Select Gender</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-          </select>
-          <input type="file" onChange={handlePicChange} />
-          <button onClick={handleSave}>Save</button>
-          <button onClick={() => navigate("/profile")}>go back</button>
-        </>
-      ) : (
-        <>
-          <p>Name: {user.name}</p>
-          <p>Email: {user.email}</p>
-          <p>Age: {user.age}</p>
-          <p>Gender: {user.gender}</p>
-          <button onClick={() => setEditMode(true)}>Edit Profile</button>
-        </>
-      )}
-    </div>
+        </div>
+        {editMode ? (
+          <div className="p-4">
+            <h2>Edit Profile</h2>
+            <form>
+              <div className="row mb-3">
+                <div className="col-md-6">
+                  <label htmlFor="name" className="form-label">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={userData.name}
+                    onChange={handleChange}
+                    id="name"
+                    className="form-control"
+                    required
+                  />
+                </div>
+                <div className="col-md-6">
+                  <label htmlFor="email" className="form-label">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={userData.email}
+                    onChange={handleChange}
+                    id="email"
+                    className="form-control"
+                    required
+                  />
+                </div>
+              </div>
+              <div className="row mb-3">
+                <div className="col-md-6">
+                  <label htmlFor="age" className="form-label">
+                    Age
+                  </label>
+                  <input
+                    type="number"
+                    name="age"
+                    value={userData.age}
+                    onChange={handleChange}
+                    id="age"
+                    className="form-control"
+                    required
+                  />
+                </div>
+                <div className="col-md-6">
+                  <label htmlFor="gender" className="form-label">
+                    Gender
+                  </label>
+                  <select
+                    name="gender"
+                    value={userData.gender}
+                    onChange={handleChange}
+                    id="gender"
+                    className="form-control"
+                  >
+                    <option value="">Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                  </select>
+                </div>
+              </div>
+              <div className="mb-3">
+                <label htmlFor="profilePic" className="form-label">
+                  Profile Picture
+                </label>
+                <input
+                  type="file"
+                  onChange={handlePicChange}
+                  id="profilePic"
+                  className="form-control"
+                />
+              </div>
+              <button
+                type="button"
+                onClick={handleSave}
+                className="btn btn-primary"
+              >
+                Save
+              </button>
+              <button
+                type="button"
+                onClick={() => navigate("/profile")}
+                className="btn btn-secondary ms-2"
+              >
+                Go Back
+              </button>
+            </form>
+          </div>
+        ) : (
+          <div className="p-4">
+            <h2>User Details</h2>
+            <p>
+              <strong>Name:</strong> {user.name}
+            </p>
+            <p>
+              <strong>Email:</strong> {user.email}
+            </p>
+            <p>
+              <strong>Age:</strong> {user.age}
+            </p>
+            <p>
+              <strong>Gender:</strong> {user.gender}
+            </p>
+            <button
+              onClick={() => setEditMode(true)}
+              className="btn btn-warning"
+            >
+              Edit Profile
+            </button>
+          </div>
+        )}
+      </div>
+    </>
   ) : null
 }
 
