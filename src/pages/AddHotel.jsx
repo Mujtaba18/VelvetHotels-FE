@@ -68,9 +68,9 @@ const AddHotel = () => {
   }
 
   return (
-    <div className="container mt-5">
+    <div className="container mt-2">
       <h2 className="mb-4">Add Hotel</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="card p-2">
         <div className="form-group mb-3">
           <label>Hotel Name:</label>
           <input

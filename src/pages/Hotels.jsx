@@ -83,34 +83,50 @@ const Hotels = () => {
                     <div className="hotels-name">
                       <h2>{hotel.hotel_name}</h2>
                       <p>
-                          {hotel.hotel_stars === 5 ? (
-                            <>
-                              <span>⭐⭐⭐⭐⭐</span>
-                            </>
-                          ) : hotel.hotel_stars === 4 ? (
-                            <>
-                              <span>⭐⭐⭐⭐</span>
-                            </>
-                          ) : hotel.hotel_stars === 3 ? (
-                            <>
-                              <span>⭐⭐⭐</span>
-                            </>
-                          ) : hotel.hotel_stars === 2 ? (
-                            <>
-                              <span>⭐⭐</span>
-                            </>
-                          ) : hotel.hotel_stars === 1 ? (
-                            <span>⭐</span>
-                          ) : (
-                            <span>Not Rated</span>
-                          )}
-                        </p>
+                        {hotel.hotel_stars === 5 ? (
+                          <>
+                            <span>⭐⭐⭐⭐⭐</span>
+                          </>
+                        ) : hotel.hotel_stars === 4 ? (
+                          <>
+                            <span>⭐⭐⭐⭐</span>
+                          </>
+                        ) : hotel.hotel_stars === 3 ? (
+                          <>
+                            <span>⭐⭐⭐</span>
+                          </>
+                        ) : hotel.hotel_stars === 2 ? (
+                          <>
+                            <span>⭐⭐</span>
+                          </>
+                        ) : hotel.hotel_stars === 1 ? (
+                          <span>⭐</span>
+                        ) : (
+                          <span>Not Rated</span>
+                        )}
+                      </p>
                     </div>
                     <div className="hotels-info-n">
-                    <p><strong>Location: </strong> {hotel.hotel_location}</p>
-                      <p><strong>Price: </strong> ${hotel.hotel_price}</p>
-                      <p><strong>Rooms: </strong> {hotel.hotel_rooms}</p>
-                      <p><strong>Rating: </strong> {hotel.hotel_rating}</p>
+                      <p>
+                        <strong>Location: </strong> {hotel.hotel_location}
+                      </p>
+                      <p>
+                        <strong>Price: </strong> ${hotel.hotel_price}
+                      </p>
+                      <p>
+                        <strong>Rooms: </strong> {hotel.hotel_rooms}
+                      </p>
+                      <p>
+                        <strong>Rating:</strong>{" "}
+                        {hotel.hotel_rating.length > 0
+                          ? (
+                              hotel.hotel_rating.reduce(
+                                (acc, review) => acc + review.rating,
+                                0
+                              ) / hotel.hotel_rating.length
+                            ).toFixed(1)
+                          : "No ratings yet"}
+                      </p>
                     </div>
                   </div>
                 </div>

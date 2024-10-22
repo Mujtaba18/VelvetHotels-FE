@@ -51,45 +51,48 @@ const Amenity = () => {
   return (
     <div className="container">
       <h2 className="mt-4">Add Amenity</h2>
-      <form onSubmit={handleAddAmenity} className="mb-4">
-        <div className="form-group">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Amenity Name"
-            value={newAmenity.amenity_name}
-            onChange={(e) =>
-              setNewAmenity({ ...newAmenity, amenity_name: e.target.value })
-            }
-            required
-          />
-        </div>
-        <div className="form-group">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Amenity Description"
-            value={newAmenity.amenity_description}
-            onChange={(e) =>
-              setNewAmenity({
-                ...newAmenity,
-                amenity_description: e.target.value,
-              })
-            }
-            required
-          />
-        </div>
-        <div className="form-group">
-          <input
-            type="file"
-            className="form-control-file"
-            onChange={handleFileChange}
-          />
-        </div>
-        <button type="submit" className="btn btn-primary">
-          Add Amenity
-        </button>
-      </form>
+      <div className="card p-2">
+
+        <form onSubmit={handleAddAmenity} className="mb-4">
+          <div className="form-group">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Amenity Name"
+              value={newAmenity.amenity_name}
+              onChange={(e) =>
+                setNewAmenity({ ...newAmenity, amenity_name: e.target.value })
+              }
+              required
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Amenity Description"
+              value={newAmenity.amenity_description}
+              onChange={(e) =>
+                setNewAmenity({
+                  ...newAmenity,
+                  amenity_description: e.target.value,
+                })
+              }
+              required
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="file"
+              className="form-control-file"
+              onChange={handleFileChange}
+            />
+          </div>
+          <button type="submit" className="btn btn-primary">
+            Add Amenity
+          </button>
+        </form>
+      </div>
       
       <h2>Amenities</h2>
       <table className="table table-bordered">

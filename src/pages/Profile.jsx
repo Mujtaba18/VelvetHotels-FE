@@ -89,7 +89,7 @@ const Profile = ({ user, setUser }) => {
         {editMode ? (
           <div className="p-4">
             <h2>Edit Profile</h2>
-            <form>
+            <form className="profile-form">
               <div className="row mb-3">
                 <div className="col-md-6">
                   <label htmlFor="name" className="form-label">

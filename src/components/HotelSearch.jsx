@@ -1,15 +1,15 @@
 const HotelSearch = ({ onSubmit, value, onChange }) => {
   return (
-    <div>
-      <h1>Search for Hotels</h1>
+    <div className="search">
       <form onSubmit={onSubmit}>
         <input
           type="text"
-          placeholder="Enter hotel name"
+          placeholder="Enter Hotel Name"
           value={value}
           onChange={onChange}
+          className="form-control"
         />
-        <button type="submit">Search</button>
+        <button type="submit" className="btn">Search</button>
       </form>
     </div>
   )
