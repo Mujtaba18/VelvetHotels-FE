@@ -72,48 +72,54 @@ const Hotels = () => {
               className="link-hotel"
             >
               <div className="hotels-card" key={hotel._id}>
-                <div className="hotels-img-info">
-                  <img
-                    className="hotels-img"
-                    src={`http://localhost:3001/${hotel.hotel_image}`}
-                    alt={hotel.hotel_name}
-                    width="300"
-                  />
-                  <div className="hotels-info">
-                    <h2>{hotel.hotel_name}</h2>
-                    <p>Location: {hotel.hotel_location}</p>
-                    {/* <p>Description: {hotel.hotel_description}</p> */}
-                    <div className="hotels-info-n">
-                      <p>Price: ${hotel.hotel_price}</p>
-                      <p>Rooms: {hotel.hotel_rooms}</p>
-                      <p>
-                        <strong>Stars:</strong>
-                        {hotel.hotel_stars === 5 ? (
-                          <>
-                            <span>⭐⭐⭐⭐⭐</span>
-                          </>
-                        ) : hotel.hotel_stars === 4 ? (
-                          <>
-                            <span>⭐⭐⭐⭐</span>
-                          </>
-                        ) : hotel.hotel_stars === 3 ? (
-                          <>
-                            <span>⭐⭐⭐</span>
-                          </>
-                        ) : hotel.hotel_stars === 2 ? (
-                          <>
-                            <span>⭐⭐</span>
-                          </>
-                        ) : hotel.hotel_stars === 1 ? (
-                          <span>⭐</span>
-                        ) : (
-                          <span>Not Rated</span>
-                        )}
-                      </p>{" "}
-                      <p>Rating: {hotel.hotel_rating}</p>
+                <div className="hotel-container">
+                  <div className="hotels-img-info">
+                    {hotel.hotel_rooms === 0 ? (
+                      <p id="hotel-isfull">Hotel is full</p>
+                    ) : null}
+                    <img
+                      className="hotels-img"
+                      src={`http://localhost:3001/${hotel.hotel_image}`}
+                      alt={hotel.hotel_name}
+                      width="300"
+                    />
+                    <div className="hotels-info">
+                      <h2>{hotel.hotel_name}</h2>
+                      <p>Location: {hotel.hotel_location}</p>
+                      {/* <p>Description: {hotel.hotel_description}</p> */}
+                      <div className="hotels-info-n">
+                        <p>Price: ${hotel.hotel_price}</p>
+                        <p>Rooms: {hotel.hotel_rooms}</p>
+                        <p>
+                          <strong>Stars:</strong>
+                          {hotel.hotel_stars === 5 ? (
+                            <>
+                              <span>⭐⭐⭐⭐⭐</span>
+                            </>
+                          ) : hotel.hotel_stars === 4 ? (
+                            <>
+                              <span>⭐⭐⭐⭐</span>
+                            </>
+                          ) : hotel.hotel_stars === 3 ? (
+                            <>
+                              <span>⭐⭐⭐</span>
+                            </>
+                          ) : hotel.hotel_stars === 2 ? (
+                            <>
+                              <span>⭐⭐</span>
+                            </>
+                          ) : hotel.hotel_stars === 1 ? (
+                            <span>⭐</span>
+                          ) : (
+                            <span>Not Rated</span>
+                          )}
+                        </p>{" "}
+                        <p>Rating: {hotel.hotel_rating}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
+
                 <div className="amenity-list">
                   {hotel.amenities.map((amenity) => (
                     <div className="amenity-card">

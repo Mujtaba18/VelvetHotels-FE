@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import BookingForm from "../components/BookingForm"
 import axios from "axios"
 
-const HotelDetails = () => {
+const HotelDetails = ({ user }) => {
   //
   const { hotelId } = useParams()
   const [HotelDetails, setHotelDetails] = useState([])
@@ -105,7 +105,13 @@ const HotelDetails = () => {
 
           <section className="hotel-booking">
             <h3>Book Hotel</h3>
-            <BookingForm hotelDetails={HotelDetails} />
+            {HotelDetails.hotel_rooms > 0 ? (
+              <BookingForm hotelDetails={HotelDetails} user={user} />
+            ) : (
+              <div className="hotel-full">
+                <p className="hotel-booking">Sorry, the hotel is full</p>
+              </div>
+            )}
           </section>
 
           <section className="hotel-reviews">

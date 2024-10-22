@@ -8,9 +8,10 @@ import HotelDetails from "./pages/HotelDetails"
 import "./App.css"
 import Hotels from "./pages/Hotels"
 import AddHotel from "./pages/AddHotel"
-import { CheckSession } from "./services/Auth" 
+import { CheckSession } from "./services/Auth"
 import Amenity from "./components/Amenity"
 import Profile from "./pages/Profile"
+import BookingForm from "./components/BookingForm"
 import "./App.css"
 
 const App = () => {
@@ -49,11 +50,15 @@ const App = () => {
           <Route path="/hotels" element={<Hotels />} />
           <Route path="/add-hotel" element={<AddHotel />} />
           <Route path="/amenities" element={<Amenity />} />
-          <Route path="/hotels/details/:hotelId" element={<HotelDetails />} />
+          <Route
+            path="/hotels/details/:hotelId"
+            element={<HotelDetails user={user} />}
+          />
           <Route
             path="/profile/:userId"
             element={<Profile user={user} setUser={setUser} />} // Keep it as is
           />
+          <Route path="/hotels/booking" element={<BookingForm />} />
         </Routes>
       </main>
     </div>

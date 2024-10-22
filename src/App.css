@@ -149,7 +149,7 @@ h3 {
 p {
   margin: 5px 0;
   line-height: 1.6;
-  text-align: left; 
+  text-align: left;
 }
 
 .hotel-booking,
@@ -170,5 +170,39 @@ select {
   background-color: white;
   border: 2px solid #bfafa5;
   border-radius: 4px;
+}
+
+.hotel-full {
+  display: flex;
+  justify-content: center;
+}
+
+.hotel-booking p {
+  font-size: 22px;
+  color: #da3832;
+  margin-top: 20px;
+  font-weight: bold;
+  padding: 15px;
+  border: 1px solid #f5c6cb;
+  border-radius: 5px;
+  width: 50%;
+}
+
+.hotel-container {
+  position: relative;
+  display: inline-block;
+}
+
+#hotel-isfull {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 0, 0, 0.7);
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  width: 90%;
 }
 /* END */
