@@ -41,7 +41,7 @@ const Hotels = () => {
   return (
     <div>
       <h1>Hotels</h1>
-      <div>
+      <div className="sort-list">
         <label htmlFor="sortBy">Sort by:</label>
 
         <select

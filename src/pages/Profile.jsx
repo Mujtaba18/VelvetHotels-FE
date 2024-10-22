@@ -4,17 +4,24 @@ import axios from "axios"
 
 const Profile = ({ user, setUser }) => {
   let navigate = useNavigate()
-  const [userData, setUserData] = useState({
-    name: user.name,
-    email: user.email,
-    age: user.age,
-    gender: user.gender,
-    profile_picture: user.profile_picture,
-  })
+  let startingState = user
+    ? {
+        name: user.name,
+        email: user.email,
+        age: user.age,
+        gender: user.gender,
+        profile_picture: user.profile_picture,
+      }
+    : null
+  const [userData, setUserData] = useState(startingState)
   const [editMode, setEditMode] = useState(false)
   const [newPic, setNewPic] = useState(null)
 
   useEffect(() => {
+    if (!user) {
+      navigate("/")
+    }
+
     const fetchProfile = async () => {
       try {
         console.log("FETCHING PROFILE DATA")
@@ -65,7 +72,7 @@ const Profile = ({ user, setUser }) => {
     }
   }
 
-  return (
+  return user ? (
     <div className="img-wrapper">
       <h1>Profile</h1>
       <img
@@ -115,7 +122,7 @@ const Profile = ({ user, setUser }) => {
         </>
       )}
     </div>
-  )
+  ) : null
 }
 
 export default Profile
