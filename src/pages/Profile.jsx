@@ -13,8 +13,6 @@ const Profile = ({ user, setUser }) => {
   })
   const [editMode, setEditMode] = useState(false)
   const [newPic, setNewPic] = useState(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -23,10 +21,7 @@ const Profile = ({ user, setUser }) => {
         const res = await axios.get(`http://localhost:3001/profile/${user.id}`)
         setUserData(res.data)
       } catch (err) {
-        setError("Error fetching profile data")
-        console.error(err)
-      } finally {
-        setLoading(false)
+        console.error("Error fetching profile data" + err)
       }
     }
     fetchProfile()
@@ -66,8 +61,7 @@ const Profile = ({ user, setUser }) => {
       setUserData(res.data)
       setEditMode(false)
     } catch (err) {
-      setError("Error updating profile")
-      console.error(err)
+      console.error("Error updating profile" + err)
     }
   }
 
@@ -75,7 +69,7 @@ const Profile = ({ user, setUser }) => {
     <div className="img-wrapper">
       <h1>Profile</h1>
       <img
-        src={`http://localhost:3001${user.profile_picture}`}
+        src={`http://localhost:3001/uploads${user.profile_picture}`}
         alt={user.profile_picture}
         style={{ width: "150px", height: "150px", borderRadius: "50%" }}
       />
