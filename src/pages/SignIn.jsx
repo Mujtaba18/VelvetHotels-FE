@@ -18,34 +18,49 @@ const SignIn = ({ setUser }) => {
   }
 
   return (
-    <div className="signin col">
-      <div className="card-overlay centered">
-        <form className="col" onSubmit={handleSubmit}>
-          <div className="input-wrapper">
-            <label htmlFor="email">Email</label>
-            <input
-              onChange={handleChange}
-              name="email"
-              type="email"
-              placeholder="example@example.com"
-              value={formValues.email}
-              required
-            />
-          </div>
-          <div className="input-wrapper">
-            <label htmlFor="password">Password</label>
-            <input
-              onChange={handleChange}
-              type="password"
-              name="password"
-              value={formValues.password}
-              required
-            />
-          </div>
-          <button disabled={!formValues.email || !formValues.password}>
-            Sign In
-          </button>
-        </form>
+    <div className="container mt-5">
+      <div className="card shadow">
+        <div className="card-header text-center">
+          <h2>Sign In</h2>
+        </div>
+        <div className="card-body">
+          <form onSubmit={handleSubmit}>
+            <div className="mb-3">
+              <label htmlFor="email" className="form-label">
+                Email
+              </label>
+              <input
+                onChange={handleChange}
+                name="email"
+                type="email"
+                className="form-control"
+                placeholder="example@example.com"
+                value={formValues.email}
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="password" className="form-label">
+                Password
+              </label>
+              <input
+                onChange={handleChange}
+                type="password"
+                name="password"
+                className="form-control"
+                value={formValues.password}
+                required
+              />
+            </div>
+            <button
+              type="submit"
+              className="btn btn-primary w-100"
+              disabled={!formValues.email || !formValues.password}
+            >
+              Sign In
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   )

@@ -10,12 +10,8 @@ const Register = () => {
     password: "",
     confirmPassword: "",
   }
-  const [formValues, setFormValues] = useState({
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  })
+
+  const [formValues, setFormValues] = useState(initialState)
 
   const handleChange = (e) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value })
@@ -28,69 +24,86 @@ const Register = () => {
       email: formValues.email,
       password: formValues.password,
     })
-    // set to empty
-    setFormValues(initialState) //short way
+    // Reset form values
+    setFormValues(initialState)
     navigate("/signin")
   }
 
   return (
-    <div className="signin col">
-      <div className="card-overlay centered">
-        <form className="col" onSubmit={handleSubmit}>
-          <div className="input-wrapper">
-            <label htmlFor="name">Name</label>
-            <input
-              onChange={handleChange}
-              name="name"
-              type="text"
-              placeholder="John Smith"
-              value={formValues.name}
-              required
-            />
-          </div>
-          <div className="input-wrapper">
-            <label htmlFor="email">Email</label>
-            <input
-              onChange={handleChange}
-              name="email"
-              type="email"
-              placeholder="example@example.com"
-              value={formValues.email}
-              required
-            />
-          </div>
-
-          <div className="input-wrapper">
-            <label htmlFor="password">Password</label>
-            <input
-              onChange={handleChange}
-              type="password"
-              name="password"
-              value={formValues.password}
-              required
-            />
-          </div>
-          <div className="input-wrapper">
-            <label htmlFor="confirmPassword">Confirm Password</label>
-            <input
-              onChange={handleChange}
-              type="password"
-              name="confirmPassword"
-              value={formValues.confirmPassword}
-              required
-            />
-          </div>
-
-          <button
-            disabled={
-              !formValues.email ||
-              (!formValues.password &&
-                formValues.confirmPassword === formValues.password)
-            }
-          >
-            Sign Up
-          </button>
-        </form>
+    <div className="container mt-5">
+      <div className="card shadow">
+        <div className="card-header text-center">
+          <h2>Sign Up</h2>
+        </div>
+        <div className="card-body">
+          <form onSubmit={handleSubmit}>
+            <div className="mb-3">
+              <label htmlFor="name" className="form-label">
+                Name
+              </label>
+              <input
+                onChange={handleChange}
+                name="name"
+                type="text"
+                className="form-control"
+                placeholder="John Smith"
+                value={formValues.name}
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="email" className="form-label">
+                Email
+              </label>
+              <input
+                onChange={handleChange}
+                name="email"
+                type="email"
+                className="form-control"
+                placeholder="example@example.com"
+                value={formValues.email}
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="password" className="form-label">
+                Password
+              </label>
+              <input
+                onChange={handleChange}
+                type="password"
+                name="password"
+                className="form-control"
+                value={formValues.password}
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="confirmPassword" className="form-label">
+                Confirm Password
+              </label>
+              <input
+                onChange={handleChange}
+                type="password"
+                name="confirmPassword"
+                className="form-control"
+                value={formValues.confirmPassword}
+                required
+              />
+            </div>
+            <button
+              type="submit"
+              className="btn btn-primary"
+              disabled={
+                !formValues.email ||
+                !formValues.password ||
+                formValues.confirmPassword !== formValues.password
+              }
+            >
+              Sign Up
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   )

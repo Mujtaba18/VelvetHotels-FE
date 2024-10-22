@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import axios from "axios"
 import { Link } from "react-router-dom"
 
-const Hotels = () => {
+const Hotels = ({user}) => {
   const [hotels, setHotels] = useState([])
   const [sortOrder, setSortOrder] = useState("low-high") //useState to handle sort order
   const [sortBy, setSortBy] = useState("price") // useState to manage what to sort

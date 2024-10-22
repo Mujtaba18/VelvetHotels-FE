@@ -210,6 +210,7 @@ button {
 button:hover {
   background-color: #bfafa5 !important;
   color: #fff !important;
+  cursor: pointer;
 }
 
 table {
@@ -228,6 +229,7 @@ table {
 }
 .search form {
   display: flex;
+  align-items: center;
   gap: 10px
 }
 
