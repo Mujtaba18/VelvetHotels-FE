@@ -13,6 +13,7 @@ import Amenity from "./components/Amenity"
 import Profile from "./pages/Profile"
 import "./App.css"
 
+
 const App = () => {
   const [user, setUser] = useState(null)
 

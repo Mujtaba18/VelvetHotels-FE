@@ -13,10 +13,8 @@ const AddHotel = () => {
   const [amenities, setAmenities] = useState([])
   const [selectedAmenities, setSelectedAmenities] = useState([])
 
-  // Handle form input change
   const navigate = useNavigate()
 
-  // Fetch amenities from the backend
   useEffect(() => {
     const fetchAmenities = async () => {
       try {
@@ -32,13 +30,10 @@ const AddHotel = () => {
     fetchAmenities()
   }, [])
 
-  // Handle checkbox toggle
   const handleAmenityToggle = (amenityId) => {
     if (selectedAmenities.includes(amenityId)) {
-      // Remove amenity if already selected
       setSelectedAmenities(selectedAmenities.filter((id) => id !== amenityId))
     } else {
-      // Add amenity if not selected
       setSelectedAmenities([...selectedAmenities, amenityId])
     }
   }
@@ -60,14 +55,12 @@ const AddHotel = () => {
     try {
       const response = await axios.post(
         "http://localhost:3001/hotels/addHotel",
-        newHotel, {
-          headers: { 'Content-Type': 'multipart/form-data' },
-      }
+        newHotel,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
       )
       console.log("Hotel added:", response.data)
-
-      const hotelId = response.data._id
-
       navigate(`/hotels`)
     } catch (error) {
       console.error("Error adding hotel:", error)
@@ -75,77 +68,127 @@ const AddHotel = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>Hotel Name:</label>
-      <input
-        type="text"
-        value={hotelName}
-        onChange={(e) => setHotelName(e.target.value)}
-        required
-      />
-
-      <label>Hotel Location:</label>
-      <input
-        type="text"
-        value={hotelLocation}
-        onChange={(e) => setHotelLocation(e.target.value)}
-        required
-      />
-
-      <label>Hotel Description:</label>
-      <textarea
-        value={hotelDescription}
-        onChange={(e) => setHotelDescription(e.target.value)}
-      />
-
-      <label>Hotel Price:</label>
-      <input
-        type="number"
-        value={hotelPrice}
-        onChange={(e) => setHotelPrice(e.target.value)}
-        required
-      />
-
-      <label>Hotel Stars:</label>
-      <input
-        type="number"
-        value={hotelStars}
-        onChange={(e) => setHotelStars(e.target.value)}
-        min="0"
-        max="5"
-      />
-
-      <label>Hotel Rooms:</label>
-      <input
-        type="number"
-        value={hotelRooms}
-        onChange={(e) => setHotelRooms(e.target.value)}
-        min="1"
-        max="400"
-      />
-
-      <label>Hotel Image:</label>
-      <input
-        type="file"
-        onChange={(e) => setHotelImage(e.target.files[0])}
-      />
-
-      <h3>Select Amenities:</h3>
-      {amenities?.map((amenity) => (
-        <div key={amenity._id}>
-          <label>
-            <input
-              type="checkbox"
-              checked={selectedAmenities.includes(amenity._id)}
-              onChange={() => handleAmenityToggle(amenity._id)}
-            />
-            {amenity.amenity_name}
-          </label>
+    <div className="container mt-5">
+      <h2 className="mb-4">Add Hotel</h2>
+      <form onSubmit={handleSubmit}>
+        <div className="form-group mb-3">
+          <label>Hotel Name:</label>
+          <input
+            type="text"
+            className="form-control"
+            value={hotelName}
+            onChange={(e) => setHotelName(e.target.value)}
+            required
+          />
         </div>
-      ))}
 
-      <button type="submit">Add Hotel</button>
-    </form>
+        <div className="form-group mb-3">
+          <label>Hotel Location:</label>
+          <input
+            type="text"
+            className="form-control"
+            value={hotelLocation}
+            onChange={(e) => setHotelLocation(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="form-group mb-3">
+          <label>Hotel Description:</label>
+          <textarea
+            className="form-control"
+            value={hotelDescription}
+            onChange={(e) => setHotelDescription(e.target.value)}
+            rows="3"
+          />
+        </div>
+
+        <div className="form-group mb-3">
+          <label>Hotel Price:</label>
+          <input
+            type="number"
+            className="form-control"
+            value={hotelPrice}
+            onChange={(e) => setHotelPrice(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="form-group mb-3">
+          <label>Hotel Stars:</label>
+          <input
+            type="number"
+            className="form-control"
+            value={hotelStars}
+            onChange={(e) => setHotelStars(e.target.value)}
+            min="0"
+            max="5"
+          />
+        </div>
+
+        <div className="form-group mb-3">
+          <label>Hotel Rooms:</label>
+          <input
+            type="number"
+            className="form-control"
+            value={hotelRooms}
+            onChange={(e) => setHotelRooms(e.target.value)}
+            min="1"
+            max="400"
+          />
+        </div>
+
+        <div className="form-group mb-3">
+          <label>Hotel Image:</label>
+          <input
+            type="file"
+            className="form-control-file"
+            onChange={(e) => setHotelImage(e.target.files[0])}
+          />
+        </div>
+
+        <h3 className="mb-3">Select Amenities:</h3>
+        <div className="card">
+          <div className="card-body">
+            <div className="row">
+              {amenities?.map((amenity) => (
+                <div
+                  key={amenity._id}
+                  className="col-md-4 col-12 mb-3 d-flex justify-content-center"
+                >
+                  <div className="form-check d-flex align-items-center">
+                    <input
+                      className="form-check-input me-2"
+                      type="checkbox"
+                      checked={selectedAmenities.includes(amenity._id)}
+                      onChange={() => handleAmenityToggle(amenity._id)}
+                      id={`amenity-${amenity._id}`}
+                    />
+                    <img
+                      src={`http://localhost:3001/${amenity.amenity_icon}`}
+                      alt="AmenityIcon"
+                      width="40px"
+                      height="40px"
+                      className="me-2"
+                    />
+                    <label
+                      className="form-check-label"
+                      htmlFor={`amenity-${amenity._id}`}
+                    >
+                      {amenity.amenity_name}
+                    </label>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" className="btn btn-primary">
+          Add Hotel
+        </button>
+      </form>
+    </div>
   )
 }
 

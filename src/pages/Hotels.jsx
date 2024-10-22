@@ -80,37 +80,37 @@ const Hotels = () => {
                     width="300"
                   />
                   <div className="hotels-info">
-                    <h2>{hotel.hotel_name}</h2>
-                    <p>Location: {hotel.hotel_location}</p>
-                    {/* <p>Description: {hotel.hotel_description}</p> */}
-                    <div className="hotels-info-n">
-                      <p>Price: ${hotel.hotel_price}</p>
-                      <p>Rooms: {hotel.hotel_rooms}</p>
+                    <div className="hotels-name">
+                      <h2>{hotel.hotel_name}</h2>
                       <p>
-                        <strong>Stars:</strong>
-                        {hotel.hotel_stars === 5 ? (
-                          <>
-                            <span>⭐⭐⭐⭐⭐</span>
-                          </>
-                        ) : hotel.hotel_stars === 4 ? (
-                          <>
-                            <span>⭐⭐⭐⭐</span>
-                          </>
-                        ) : hotel.hotel_stars === 3 ? (
-                          <>
-                            <span>⭐⭐⭐</span>
-                          </>
-                        ) : hotel.hotel_stars === 2 ? (
-                          <>
-                            <span>⭐⭐</span>
-                          </>
-                        ) : hotel.hotel_stars === 1 ? (
-                          <span>⭐</span>
-                        ) : (
-                          <span>Not Rated</span>
-                        )}
-                      </p>{" "}
-                      <p>Rating: {hotel.hotel_rating}</p>
+                          {hotel.hotel_stars === 5 ? (
+                            <>
+                              <span>⭐⭐⭐⭐⭐</span>
+                            </>
+                          ) : hotel.hotel_stars === 4 ? (
+                            <>
+                              <span>⭐⭐⭐⭐</span>
+                            </>
+                          ) : hotel.hotel_stars === 3 ? (
+                            <>
+                              <span>⭐⭐⭐</span>
+                            </>
+                          ) : hotel.hotel_stars === 2 ? (
+                            <>
+                              <span>⭐⭐</span>
+                            </>
+                          ) : hotel.hotel_stars === 1 ? (
+                            <span>⭐</span>
+                          ) : (
+                            <span>Not Rated</span>
+                          )}
+                        </p>
+                    </div>
+                    <div className="hotels-info-n">
+                    <p><strong>Location: </strong> {hotel.hotel_location}</p>
+                      <p><strong>Price: </strong> ${hotel.hotel_price}</p>
+                      <p><strong>Rooms: </strong> {hotel.hotel_rooms}</p>
+                      <p><strong>Rating: </strong> {hotel.hotel_rating}</p>
                     </div>
                   </div>
                 </div>

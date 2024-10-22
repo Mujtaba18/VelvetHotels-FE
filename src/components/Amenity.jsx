@@ -49,54 +49,78 @@ const Amenity = () => {
   }, [])
 
   return (
-    <div>
-      <h2>Add Amenity</h2>
-      <form onSubmit={handleAddAmenity}>
-        <input
-          type="text"
-          placeholder="Amenity Name"
-          value={newAmenity.amenity_name}
-          onChange={(e) =>
-            setNewAmenity({ ...newAmenity, amenity_name: e.target.value })
-          }
-          required
-        />
-        <input
-          type="text"
-          placeholder="Amenity Description"
-          value={newAmenity.amenity_description}
-          onChange={(e) =>
-            setNewAmenity({
-              ...newAmenity,
-              amenity_description: e.target.value,
-            })
-          }
-          required
-        />
-        <input
-          type="file"
-          placeholder="Amenity Icon URL"
-          onChange={handleFileChange}
-        />
-        <button type="submit">Add Amenity</button>
+    <div className="container">
+      <h2 className="mt-4">Add Amenity</h2>
+      <form onSubmit={handleAddAmenity} className="mb-4">
+        <div className="form-group">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Amenity Name"
+            value={newAmenity.amenity_name}
+            onChange={(e) =>
+              setNewAmenity({ ...newAmenity, amenity_name: e.target.value })
+            }
+            required
+          />
+        </div>
+        <div className="form-group">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Amenity Description"
+            value={newAmenity.amenity_description}
+            onChange={(e) =>
+              setNewAmenity({
+                ...newAmenity,
+                amenity_description: e.target.value,
+              })
+            }
+            required
+          />
+        </div>
+        <div className="form-group">
+          <input
+            type="file"
+            className="form-control-file"
+            onChange={handleFileChange}
+          />
+        </div>
+        <button type="submit" className="btn btn-primary">
+          Add Amenity
+        </button>
       </form>
+      
       <h2>Amenities</h2>
-      <div>
-        {amenities.map((amenity) => (
-          <div key={amenity._id}>
-            <h3>{amenity.amenity_name}</h3>
-            <p>{amenity.amenity_description}</p>
-            {amenity.amenity_icon && (
-              <img
-                src={`http://localhost:3001/${amenity.amenity_icon}`}
-                alt={amenity.amenity_name}
-                width="100px"
-                height="100px"
-              />
-            )}
-          </div>
-        ))}
-      </div>
+      <table className="table table-bordered">
+        <thead className="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Amenity Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Icon</th>
+          </tr>
+        </thead>
+        <tbody>
+          {amenities.map((amenity, index) => (
+            <tr key={amenity._id}>
+              <th scope="row">{index + 1}</th>
+              <td>{amenity.amenity_name}</td>
+              <td>{amenity.amenity_description}</td>
+              <td>
+                {amenity.amenity_icon && (
+                  <img
+                    src={`http://localhost:3001/${amenity.amenity_icon}`}
+                    alt={amenity.amenity_name}
+                    width="50"
+                    height="50"
+                  />
+                )}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   )
 }
