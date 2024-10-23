@@ -1,6 +1,5 @@
 const HotelSearch = ({ onSubmit, value, onChange }) => {
   return (
-    <div className="search">
       <form onSubmit={onSubmit}>
         <input
           type="text"
@@ -11,7 +10,6 @@ const HotelSearch = ({ onSubmit, value, onChange }) => {
         />
         <button type="submit" className="btn">Search</button>
       </form>
-    </div>
   )
 }
 

@@ -26,8 +26,8 @@ const MyBooking = ({ user }) => {
   }, [user.id])
 
   return user ? (
-    <>
-      <div className="container mt-4">
+    <div className="bookings">
+      <div className="mt-2 bookings-table ">
         <h1 className="text-center">My Bookings</h1>
         {booking.length > 0 ? (
           <table className="table table-striped">
@@ -90,7 +90,7 @@ const MyBooking = ({ user }) => {
           <p className="text-center">No bookings found.</p>
         )}
       </div>
-    </>
+    </div>
   ) : (
     <div className="text-center">
       <h3>Oops! You must be signed in to do that!</h3>

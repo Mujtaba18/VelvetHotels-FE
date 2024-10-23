@@ -48,7 +48,7 @@ const Home = () => {
   return (
     <div className="home">
       <section>
-        <div>
+        <div className="search">
           <HotelSearch
             onChange={handleChange}
             value={searchTerm}
