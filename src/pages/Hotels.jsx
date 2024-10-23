@@ -4,6 +4,7 @@ import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
 
 const Hotels = ({ user }) => {
+  let navigate = useNavigate()
   const [hotels, setHotels] = useState([])
   const [sortOrder, setSortOrder] = useState("low-high")
   const [sortBy, setSortBy] = useState("price")
@@ -27,7 +28,8 @@ const Hotels = ({ user }) => {
   const handleDelete = async (id) => {
     try {
       await axios.delete(`http://localhost:3001/hotels/deleteHotel/${id}`)
-      fetchHotels() // Re-fetch the updated list after deletion
+      setHotels(hotels.filter((hotel) => hotel._id !== id))
+      alert('Hotel Deleted Succesfully!!')
     } catch (error) {
       console.error("Error deleting hotel:", error)
     }
