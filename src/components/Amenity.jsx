@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react"
-import { getAmenities, addAmenity } from "../services/amenity"
+import React, { useEffect, useState } from 'react'
+import { getAmenities, addAmenity, deleteAmenity } from '../services/amenity'
 
 const Amenity = () => {
   const [amenities, setAmenities] = useState([])
   const [newAmenity, setNewAmenity] = useState({
-    amenity_name: "",
-    amenity_description: "",
-    amenity_icon: null,
+    amenity_name: '',
+    amenity_description: '',
+    amenity_icon: null
   })
 
   const fetchAmenities = async () => {
@@ -24,23 +24,35 @@ const Amenity = () => {
 
   const handleAddAmenity = async (e) => {
     e.preventDefault()
-    console.log("Adding amenity:", newAmenity)
+    console.log('Adding amenity:', newAmenity)
     const formData = new FormData()
-    formData.append("amenity_name", newAmenity.amenity_name)
-    formData.append("amenity_description", newAmenity.amenity_description)
-    formData.append("amenity_icon", newAmenity.amenity_icon)
+    formData.append('amenity_name', newAmenity.amenity_name)
+    formData.append('amenity_description', newAmenity.amenity_description)
+    formData.append('amenity_icon', newAmenity.amenity_icon)
 
     try {
       const addedAmenity = await addAmenity(formData)
-      console.log("Added Amenity:", addedAmenity)
+      console.log('Added Amenity:', addedAmenity)
       setAmenities([...amenities, addedAmenity.amenity])
       setNewAmenity({
-        amenity_name: "",
-        amenity_description: "",
-        amenity_icon: null,
+        amenity_name: '',
+        amenity_description: '',
+        amenity_icon: null
       })
     } catch (error) {
       console.error(error.message)
+    }
+  }
+
+  const handleDeleteAmenity = async (id) => {
+    if (window.confirm('Are you sure you want to delete this amenity?')) {
+      try {
+        await deleteAmenity(id)
+        setAmenities(amenities.filter((amenity) => amenity._id !== id))
+        alert('Amenity deleted successfully')
+      } catch (error) {
+        console.error('Error deleting amenity:', error)
+      }
     }
   }
 
@@ -68,7 +80,7 @@ const Amenity = () => {
           onChange={(e) =>
             setNewAmenity({
               ...newAmenity,
-              amenity_description: e.target.value,
+              amenity_description: e.target.value
             })
           }
           required
@@ -94,6 +106,9 @@ const Amenity = () => {
                 height="100px"
               />
             )}
+            <button onClick={() => handleDeleteAmenity(amenity._id)}>
+              Delete
+            </button>
           </div>
         ))}
       </div>
