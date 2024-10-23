@@ -73,7 +73,7 @@ const HotelDetails = ({ user }) => {
         formData.append("hotel_image", newPic)
       }
       const res = await axios.put(
-        `http://localhost:3001/hotels/${hotelDetails._id}`,
+        `http://localhost:3001/hotels/${hotelData._id}`,
         formData,
         {
           headers: {
