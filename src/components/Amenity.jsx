@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { getAmenities, addAmenity } from "../services/amenity"
+import { getAmenities, addAmenity, deleteAmenity } from "../services/amenity"
 
 const Amenity = () => {
   const [amenities, setAmenities] = useState([])
@@ -44,6 +44,18 @@ const Amenity = () => {
     }
   }
 
+  const handleDeleteAmenity = async (id) => {
+    if (window.confirm("Are you sure you want to delete this amenity?")) {
+      try {
+        await deleteAmenity(id)
+        setAmenities(amenities.filter((amenity) => amenity._id !== id))
+        alert("Amenity deleted successfully")
+      } catch (error) {
+        console.error("Error deleting amenity:", error)
+      }
+    }
+  }
+
   useEffect(() => {
     fetchAmenities()
   }, [])
@@ -52,7 +64,6 @@ const Amenity = () => {
     <div className="container">
       <h2 className="mt-4">Add Amenity</h2>
       <div className="card p-4">
-
         <form onSubmit={handleAddAmenity} className="mb-4">
           <div className="form-group">
             <input
@@ -93,7 +104,7 @@ const Amenity = () => {
           </button>
         </form>
       </div>
-      
+
       <h2>Amenities</h2>
       <table className="table table-bordered">
         <thead className="thead-dark">
@@ -102,6 +113,7 @@ const Amenity = () => {
             <th scope="col">Amenity Name</th>
             <th scope="col">Description</th>
             <th scope="col">Icon</th>
+            <th scope="col">Delete</th>
           </tr>
         </thead>
         <tbody>
@@ -119,6 +131,12 @@ const Amenity = () => {
                     height="50"
                   />
                 )}
+              </td>
+              <td>
+                {" "}
+                <button onClick={() => handleDeleteAmenity(amenity._id)}>
+                  Delete
+                </button>
               </td>
             </tr>
           ))}
