@@ -148,6 +148,7 @@ const HotelDetails = ({ user }) => {
                 value={hotelData.hotel_name}
                 onChange={handleChange}
                 placeholder="Hotel Name"
+                className="form-control mb-2"
               />
               <input
                 type="text"
@@ -155,6 +156,7 @@ const HotelDetails = ({ user }) => {
                 value={hotelData.hotel_location}
                 onChange={handleChange}
                 placeholder="Hotel Location"
+                className="form-control mb-2"
               />
               <input
                 type="text"
@@ -162,6 +164,7 @@ const HotelDetails = ({ user }) => {
                 value={hotelData.hotel_description}
                 onChange={handleChange}
                 placeholder="Hotel Description"
+                className="form-control mb-2"
               />
               <input
                 type="number"
@@ -169,11 +172,13 @@ const HotelDetails = ({ user }) => {
                 value={hotelData.hotel_price}
                 onChange={handleChange}
                 placeholder="Hotel Price"
+                className="form-control mb-2"
               />
               <select
                 name="hotel_stars"
                 value={hotelData.hotel_stars}
                 onChange={handleChange}
+                className="form-control mb-2"
               >
                 <option value="">Select Star</option>
                 <option value="5">⭐⭐⭐⭐⭐</option>
@@ -182,50 +187,49 @@ const HotelDetails = ({ user }) => {
                 <option value="2">⭐⭐</option>
                 <option value="1">⭐</option>
               </select>
-              <input type="file" onChange={handlePicChange} />
-              <button onClick={handleSave}>Save</button>
-              <button onClick={() => setEditMode(false)}>Cancel</button>
+              <input type="file" onChange={handlePicChange} className="form-control mb-2" />
+              <button onClick={handleSave} className="btn mr-2 mb-2">Save</button>
+              <button onClick={() => setEditMode(false)} className="btn mb-2">Cancel</button>
             </>
           ) : (
             <>
-          <section className="hotel-info">
-            <h3>Hotel Information</h3>
-            <p>
-              <strong>Hotel Name:</strong> {HotelDetails.hotel_name}
-            </p>
-            <p>
-              <strong>Location:</strong> {HotelDetails.hotel_location}
-            </p>
-            <p>
-              <strong>Stars:</strong>
-              {HotelDetails.hotel_stars === 5 ? (
-                <span>⭐⭐⭐⭐⭐</span>
-              ) : HotelDetails.hotel_stars === 4 ? (
-                <span>⭐⭐⭐⭐</span>
-              ) : HotelDetails.hotel_stars === 3 ? (
-                <span>⭐⭐⭐</span>
-              ) : HotelDetails.hotel_stars === 2 ? (
-                <span>⭐⭐</span>
-              ) : HotelDetails.hotel_stars === 1 ? (
-                <span>⭐</span>
-              ) : (
-                <span>Not Rated</span>
-              )}
-            </p>
-            <p>
-              <strong>Available Rooms:</strong> {HotelDetails.hotel_rooms}
-            </p>
-            <p>
-              <strong>Price Per Room:</strong> ${HotelDetails.hotel_price}
-            </p>
-          </section>
+              <section className="hotel-info">
+                <h3>Hotel Information</h3>
+                <p>
+                  <strong>Hotel Name:</strong> {HotelDetails.hotel_name}
+                </p>
+                <p>
+                  <strong>Location:</strong> {HotelDetails.hotel_location}
+                </p>
+                <p>
+                  <strong>Stars:</strong>
+                  {HotelDetails.hotel_stars === 5 ? (
+                    <span>⭐⭐⭐⭐⭐</span>
+                  ) : HotelDetails.hotel_stars === 4 ? (
+                    <span>⭐⭐⭐⭐</span>
+                  ) : HotelDetails.hotel_stars === 3 ? (
+                    <span>⭐⭐⭐</span>
+                  ) : HotelDetails.hotel_stars === 2 ? (
+                    <span>⭐⭐</span>
+                  ) : HotelDetails.hotel_stars === 1 ? (
+                    <span>⭐</span>
+                  ) : (
+                    <span>Not Rated</span>
+                  )}
+                </p>
+                <p>
+                  <strong>Available Rooms:</strong> {HotelDetails.hotel_rooms}
+                </p>
+                <p>
+                  <strong>Price Per Room:</strong> ${HotelDetails.hotel_price}
+                </p>
+              </section>
 
-          <section className="hotel-description">
-            <h3>Description</h3>
-            <p>{HotelDetails.hotel_description}</p>
-          </section>
-          <button onClick={() => setEditMode(true)}>Edit Hotel</button>
-          </>
+              <section className="hotel-description">
+                <h3>Description</h3>
+                <p>{HotelDetails.hotel_description}</p>
+              </section>
+            </>
           )}
           <section>
             <h3>Hotel Amenities</h3>
@@ -246,7 +250,9 @@ const HotelDetails = ({ user }) => {
           {user ? (
             <>
               {user.role === "admin" ? (
-                <></>
+                <>
+                  <button onClick={() => setEditMode(true)} className="btn">Edit Hotel</button>
+                </>
               ) : user.role === "user" ? (
                 <>
                   <section className="hotel-booking">
