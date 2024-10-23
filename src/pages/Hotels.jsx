@@ -217,8 +217,8 @@ const Hotels = ({ user }) => {
                               <div
                                 id={`carousel-${hotel._id}`}
                                 className="carousel slide container"
-                                data-ride="carousel"
-                                data-interval="3000"
+                                data-bs-ride="carousel"
+                                data-bs-interval="3000"
                               >
                                 <div className="carousel-inner">
                                   {hotel.hotel_images.map((image, index) => (
@@ -229,41 +229,39 @@ const Hotels = ({ user }) => {
                                       }`}
                                     >
                                       <img
-                                        className="d-block w-100"
+                                        className="d-block"
                                         src={`http://localhost:3001/${image}`}
                                         alt={hotel.hotel_name}
-                                        width="40px"
-                                        height="100px"
+                                        width="200"
+                                        height="120"
                                       />
                                     </div>
                                   ))}
                                 </div>
-                                <a
+                                <button
                                   className="carousel-control-prev"
-                                  href={`#carousel-${hotel._id}`}
-                                  role="button"
-                                  data-slide="prev"
+                                  type="button"
+                                  data-bs-target={`#carousel-${hotel._id}`}
+                                  data-bs-slide="prev"
                                   onClick={(e) => e.stopPropagation()}
                                 >
                                   <span
                                     className="carousel-control-prev-icon"
                                     aria-hidden="true"
                                   ></span>
-                                  <span className="sr-only">Previous</span>
-                                </a>
-                                <a
+                                </button>
+                                <button
                                   className="carousel-control-next"
-                                  href={`#carousel-${hotel._id}`}
-                                  role="button"
-                                  data-slide="next"
+                                  type="button"
+                                  data-bs-target={`#carousel-${hotel._id}`}
+                                  data-bs-slide="next"
                                   onClick={(e) => e.stopPropagation()}
                                 >
                                   <span
                                     className="carousel-control-next-icon"
                                     aria-hidden="true"
                                   ></span>
-                                  <span className="sr-only">Next</span>
-                                </a>
+                                </button>
                               </div>
                               <div className="hotels-info-n">
                                 <p>
