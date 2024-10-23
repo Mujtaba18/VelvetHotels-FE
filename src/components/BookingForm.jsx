@@ -1,23 +1,56 @@
 import React, { useState } from "react"
+import axios from "axios"
+import { useNavigate } from "react-router-dom"
+const BookingForm = ({ hotelDetails, user }) => {
+  const [message, setmessage] = useState("") // State for error message
 
-const BookingForm = ({ hotelDetails }) => {
-  const [bookingData, setBookingData] = useState({
+  let navigate = useNavigate()
+  const initialState = {
     checkIn: "",
     checkOut: "",
+    numberOfGuests: "",
     rooms: 1, // For rooms it must be min 1
-  })
+  }
+  const [bookingData, setBookingData] = useState(initialState)
 
   // function to handel Change the inputs
   const handleChange = (e) => {
-    const { name, value } = e.target
-    setBookingData({ ...bookingData, [name]: value })
+    setBookingData({ ...bookingData, [e.target.name]: e.target.value })
   }
   // function to handel Submit the form
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    // API to do
-    console.log("Booking data submitted:", bookingData)
+
+    // Check if checkOut is after checkIn
+    if (new Date(bookingData.checkOut) <= new Date(bookingData.checkIn)) {
+      setmessage("Check-out must be after check-in")
+      setTimeout(() => {
+        setmessage("")
+      }, 4500)
+
+      return // Do not submit
+    }
+    try {
+      const DataSubmited = {
+        ...bookingData, // store data from the form
+        hotelId: hotelDetails._id, // store hotelId
+        hotelPrice: hotelDetails.hotel_price, // store hotel_price
+        userId: user.id, // store userId
+      }
+
+      const response = await axios.post(
+        "http://localhost:3001/hotels/booking",
+        DataSubmited
+      )
+      console.log("data", response.data)
+      console.log("Booking data submitted:", bookingData)
+
+      navigate(`/hotels/mybooking`)
+      setBookingData(initialState)
+    } catch (error) {
+      throw error
+    }
   }
 
   return (
@@ -70,12 +103,25 @@ const BookingForm = ({ hotelDetails }) => {
           id="rooms"
         />
       </div>
-
+      <label>
+        Number Of Guests:
+        <input
+          type="number"
+          name="numberOfGuests"
+          value={bookingData.numberOfGuests}
+          onChange={handleChange}
+          min="1"
+          required
+        />
+      </label>
       <button type="submit" className="btn btn-primary">
         Book Now
       </button>
+      {message && <div className="message">{message}</div>}
     </form>
   )
 }
 
 export default BookingForm
+
+//

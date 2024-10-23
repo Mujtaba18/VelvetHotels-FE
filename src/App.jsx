@@ -8,11 +8,12 @@ import HotelDetails from "./pages/HotelDetails"
 import "./App.css"
 import Hotels from "./pages/Hotels"
 import AddHotel from "./pages/AddHotel"
-import { CheckSession } from "./services/Auth" 
+import { CheckSession } from "./services/Auth"
 import Amenity from "./components/Amenity"
 import Profile from "./pages/Profile"
+import BookingForm from "./components/BookingForm"
+import MyBooking from "./pages/MyBooking"
 import "./App.css"
-
 
 const App = () => {
   const [user, setUser] = useState(null)
@@ -50,11 +51,16 @@ const App = () => {
           <Route path="/hotels" element={<Hotels user={user} />} />
           <Route path="/add-hotel" element={<AddHotel />} />
           <Route path="/amenities" element={<Amenity />} />
-          <Route path="/hotels/details/:hotelId" element={<HotelDetails user={user} />} />
+          <Route
+            path="/hotels/details/:hotelId"
+            element={<HotelDetails user={user} />}
+          />
+          <Route path="/hotels/mybooking" element={<MyBooking user={user} />} />
           <Route
             path="/profile/:userId"
-            element={<Profile user={user} setUser={setUser} />} // Keep it as is
+            element={<Profile user={user} setUser={setUser} />}
           />
+          <Route path="/hotels/booking" element={<BookingForm />} />
         </Routes>
       </main>
     </div>

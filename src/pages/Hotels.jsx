@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import axios from "axios"
 import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 const Hotels = ({ user }) => {
   const [hotels, setHotels] = useState([])
@@ -22,6 +23,15 @@ const Hotels = ({ user }) => {
 
     fetchHotels()
   }, [])
+  // Handle hotel deletion
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:3001/hotels/deleteHotel/${id}`)
+      fetchHotels() // Re-fetch the updated list after deletion
+    } catch (error) {
+      console.error("Error deleting hotel:", error)
+    }
+  }
 
   useEffect(() => {
     const calculateRatingAverages = () => {
@@ -106,6 +116,7 @@ const Hotels = ({ user }) => {
                         <th>Rooms</th>
                         <th>Rating</th>
                         <th>Amenities</th>
+                        <th>Delete</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -135,6 +146,12 @@ const Hotels = ({ user }) => {
                                 <span>{amenity.amenity_name}</span>
                               </div>
                             ))}
+                          </td>
+                          <td>
+                            {" "}
+                            <button onClick={() => handleDelete(hotel._id)}>
+                              Delete
+                            </button>
                           </td>
                         </tr>
                       ))}
@@ -181,6 +198,9 @@ const Hotels = ({ user }) => {
                       >
                         <div className="hotels-card" key={hotel._id}>
                           <div className="hotels-img-info">
+                            {hotel.hotel_rooms === 0 ? (
+                              <p id="hotel-isfull">Hotel is full</p>
+                            ) : null}
                             <img
                               className="hotels-img"
                               src={`http://localhost:3001/${hotel.hotel_image}`}

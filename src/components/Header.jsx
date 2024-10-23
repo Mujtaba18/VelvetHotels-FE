@@ -11,7 +11,7 @@ const Header = ({ user, handleLogOut }) => {
         <nav>
           <Link to="/">Home</Link>
           <Link to="/hotels">Hotels</Link>
-          <Link to="/">My Booking</Link>
+          <Link to="/hotels/mybooking">My Booking</Link>
           <Link to={`/profile/${user.id}`}>Profile</Link>
           <Link onClick={handleLogOut} to="/">
             Sign Out
@@ -48,7 +48,11 @@ const Header = ({ user, handleLogOut }) => {
     if (user.role === "user") {
       welcomeMsg = <p className="welcomeMsg">Welcome {user.name}!</p>
     } else if (user.role === "admin") {
-      welcomeMsg = <p className="welcomeMsg">Welcome {user.name}! <span>-Admin-</span></p>
+      welcomeMsg = (
+        <p className="welcomeMsg">
+          Welcome {user.name}! <span>-Admin-</span>
+        </p>
+      )
     }
   } else {
     welcomeMsg = <p className="welcomeMsg">Welcome Guest!</p>
@@ -58,7 +62,12 @@ const Header = ({ user, handleLogOut }) => {
     <header>
       <Link to="/">
         <div className="logo-wrapper" alt="logo">
-          <img src="https://i.postimg.cc/TP6D3xrK/Velvet-Hotels-logo.png" alt="Logo" width="50px" height="50px" />
+          <img
+            src="https://i.postimg.cc/TP6D3xrK/Velvet-Hotels-logo.png"
+            alt="Logo"
+            width="50px"
+            height="50px"
+          />
         </div>
       </Link>
       {welcomeMsg}

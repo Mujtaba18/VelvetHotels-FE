@@ -10,6 +10,7 @@ const HotelDetails = ({ user }) => {
   const [rating, setRating] = useState(0)
   const [comment, setComment] = useState("")
   const [submitted, setSubmitted] = useState(false)
+  const [message, setmessage] = useState("")
 
   useEffect(() => {
     const fetchHotelData = async () => {
@@ -152,7 +153,13 @@ const HotelDetails = ({ user }) => {
 
           <section className="hotel-booking">
             <h3>Book Hotel</h3>
-            <BookingForm hotelDetails={HotelDetails} />
+            {HotelDetails.hotel_rooms > 0 ? (
+              <BookingForm hotelDetails={HotelDetails} user={user} />
+            ) : (
+              <div className="hotel-full">
+                <p className="hotel-booking">Sorry, the hotel is full</p>
+              </div>
+            )}
           </section>
 
           <section className="hotel-reviews">
