@@ -48,11 +48,53 @@ const HotelDetails = ({ user }) => {
       {HotelDetails ? (
         <div className="hotel-details" key={HotelDetails._id}>
           <h2>{HotelDetails.hotel_name}</h2>
-          <img
-            src={`http://localhost:3001/${HotelDetails.hotel_image}`}
-            alt={HotelDetails.hotel_name}
-            width="300"
-          />
+          <div
+            id={`carousel-${HotelDetails._id}`}
+            className="carousel slide"
+            data-bs-ride="carousel"
+            data-bs-interval="3000"
+          >
+            <div className="carousel-inner">
+              {Array.isArray(HotelDetails.hotel_images) && 
+                HotelDetails.hotel_images.map((image, index) => (
+                  <div
+                    key={index}
+                    className={`carousel-item ${index === 0 ? "active" : ""}`}
+                  >
+                    <img
+                      className="d-block"
+                      src={`http://localhost:3001/${image}`}
+                      alt={HotelDetails.hotel_name}
+                    />
+                  </div>
+                ))
+              }
+            </div>
+            <button
+              className="carousel-control-prev"
+              type="button"
+              data-bs-target={`#carousel-${HotelDetails._id}`}
+              data-bs-slide="prev"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <span
+                className="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+            </button>
+            <button
+              className="carousel-control-next"
+              type="button"
+              data-bs-target={`#carousel-${HotelDetails._id}`}
+              data-bs-slide="next"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <span
+                className="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+            </button>
+          </div>
 
           <section className="hotel-info">
             <h3>Hotel Information</h3>
