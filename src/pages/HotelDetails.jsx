@@ -130,7 +130,7 @@ const HotelDetails = ({ user }) => {
                     <strong>Comment:</strong>{" "}
                     {review.comment || "No comment provided."}
                   </p>
-                  <hr/>
+                  <hr />
                 </div>
               ))
             ) : (

@@ -34,15 +34,15 @@ const Hotels = ({ user }) => {
                   0
                 ) / hotel.hotel_rating.length
               ).toFixed(1)
-            : "No ratings yet";
-        return { ...acc, [hotel._id]: average };
-      }, {});
+            : "No ratings yet"
+        return { ...acc, [hotel._id]: average }
+      }, {})
 
-      setRatingAverage(averages);
-    };
+      setRatingAverage(averages)
+    }
 
-    calculateRatingAverages();
-  }, [hotels]);
+    calculateRatingAverages()
+  }, [hotels])
 
   const sortedHotels = [...hotels].sort((a, b) => {
     if (sortBy === "price") {
@@ -50,16 +50,20 @@ const Hotels = ({ user }) => {
         ? a.hotel_price - b.hotel_price
         : b.hotel_price - a.hotel_price
     } else if (sortBy === "rating") {
-      const averageRatingA = a.hotel_rating.length > 0
-        ? a.hotel_rating.reduce((acc, review) => acc + review.rating, 0) / a.hotel_rating.length
-        : 0;
-      const averageRatingB = b.hotel_rating.length > 0
-        ? b.hotel_rating.reduce((acc, review) => acc + review.rating, 0) / b.hotel_rating.length
-        : 0;
-  
+      const averageRatingA =
+        a.hotel_rating.length > 0
+          ? a.hotel_rating.reduce((acc, review) => acc + review.rating, 0) /
+            a.hotel_rating.length
+          : 0
+      const averageRatingB =
+        b.hotel_rating.length > 0
+          ? b.hotel_rating.reduce((acc, review) => acc + review.rating, 0) /
+            b.hotel_rating.length
+          : 0
+
       return sortOrder === "low-high"
         ? averageRatingA - averageRatingB
-        : averageRatingB - averageRatingA;
+        : averageRatingB - averageRatingA
     }
   })
 
@@ -118,9 +122,7 @@ const Hotels = ({ user }) => {
                           <td>{hotel.hotel_location}</td>
                           <td>${hotel.hotel_price}</td>
                           <td>{hotel.hotel_rooms}</td>
-                          <td>
-                         {ratingAverage[hotel._id]}
-                          </td>
+                          <td>{ratingAverage[hotel._id]}</td>
                           <td>
                             {hotel.amenities.map((amenity) => (
                               <div key={amenity._id} className="amenity-card">
@@ -216,7 +218,7 @@ const Hotels = ({ user }) => {
                                 id={`carousel-${hotel._id}`}
                                 className="carousel slide container"
                                 data-ride="carousel"
-                                data-interval="3000" 
+                                data-interval="3000"
                               >
                                 <div className="carousel-inner">
                                   {hotel.hotel_images.map((image, index) => (
@@ -241,7 +243,7 @@ const Hotels = ({ user }) => {
                                   href={`#carousel-${hotel._id}`}
                                   role="button"
                                   data-slide="prev"
-                                  onClick={(e) => e.stopPropagation()} 
+                                  onClick={(e) => e.stopPropagation()}
                                 >
                                   <span
                                     className="carousel-control-prev-icon"
@@ -254,7 +256,7 @@ const Hotels = ({ user }) => {
                                   href={`#carousel-${hotel._id}`}
                                   role="button"
                                   data-slide="next"
-                                  onClick={(e) => e.stopPropagation()} 
+                                  onClick={(e) => e.stopPropagation()}
                                 >
                                   <span
                                     className="carousel-control-next-icon"
