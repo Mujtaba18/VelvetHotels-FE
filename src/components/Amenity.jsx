@@ -51,7 +51,7 @@ const Amenity = () => {
   return (
     <div className="container">
       <h2 className="mt-4">Add Amenity</h2>
-      <div className="card p-2">
+      <div className="card p-4">
 
         <form onSubmit={handleAddAmenity} className="mb-4">
           <div className="form-group">
