@@ -11,6 +11,11 @@ const HotelDetails = ({ user }) => {
   const [comment, setComment] = useState("")
   const [submitted, setSubmitted] = useState(false)
   const [message, setmessage] = useState("")
+  const navigate = useNavigate()
+  const [hotelData, setHotelData] = useState({})
+  const [editMode, setEditMode] = useState(false)
+  const [newPic, setNewPic] = useState(null)
+  const [hotelAmenities, setHotelAmenities] = useState([])
 
   useEffect(() => {
     const fetchHotelData = async () => {
@@ -20,6 +25,8 @@ const HotelDetails = ({ user }) => {
         )
         setHotelDetails(response.data)
         setHotelamenities(response.data.amenities)
+        setHotelData(response.data)
+        setHotelAmenities(response.data.amenities || [])
       } catch (error) {
         console.error(error)
       }
@@ -44,11 +51,49 @@ const HotelDetails = ({ user }) => {
     }
   }
 
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setHotelData({ ...hotelData, [name]: value })
+  }
+
+  const handlePicChange = (e) => {
+    const file = e.target.files[0]
+    setNewPic(file)
+  }
+
+  const handleSave = async () => {
+    try {
+      const formData = new FormData()
+      formData.append("hotel_name", hotelData.hotel_name)
+      formData.append("hotel_location", hotelData.hotel_location)
+      formData.append("hotel_description", hotelData.hotel_description)
+      formData.append("hotel_price", hotelData.hotel_price)
+      formData.append("hotel_stars", hotelData.hotel_stars)
+      if (newPic) {
+        formData.append("hotel_image", newPic)
+      }
+      const res = await axios.put(
+        `http://localhost:3001/hotels/${hotelDetails._id}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      )
+      setHotelDetails(res.data)
+      setHotelData(res.data)
+      setEditMode(false)
+    } catch (error) {
+      console.error("Error updating hotel:", error)
+    }
+  }
+
   return (
     <>
       {HotelDetails ? (
         <div className="hotel-details" key={HotelDetails._id}>
-          <h2>{HotelDetails.hotel_name}</h2>
+          <h2>{editMode ? "Edit Hotel" : HotelDetails.hotel_name}</h2>
           <div
             id={`carousel-${HotelDetails._id}`}
             className="carousel slide"
@@ -95,7 +140,54 @@ const HotelDetails = ({ user }) => {
               ></span>
             </button>
           </div>
-
+          {editMode ? (
+            <>
+              <input
+                type="text"
+                name="hotel_name"
+                value={hotelData.hotel_name}
+                onChange={handleChange}
+                placeholder="Hotel Name"
+              />
+              <input
+                type="text"
+                name="hotel_location"
+                value={hotelData.hotel_location}
+                onChange={handleChange}
+                placeholder="Hotel Location"
+              />
+              <input
+                type="text"
+                name="hotel_description"
+                value={hotelData.hotel_description}
+                onChange={handleChange}
+                placeholder="Hotel Description"
+              />
+              <input
+                type="number"
+                name="hotel_price"
+                value={hotelData.hotel_price}
+                onChange={handleChange}
+                placeholder="Hotel Price"
+              />
+              <select
+                name="hotel_stars"
+                value={hotelData.hotel_stars}
+                onChange={handleChange}
+              >
+                <option value="">Select Star</option>
+                <option value="5">⭐⭐⭐⭐⭐</option>
+                <option value="4">⭐⭐⭐⭐</option>
+                <option value="3">⭐⭐⭐</option>
+                <option value="2">⭐⭐</option>
+                <option value="1">⭐</option>
+              </select>
+              <input type="file" onChange={handlePicChange} />
+              <button onClick={handleSave}>Save</button>
+              <button onClick={() => setEditMode(false)}>Cancel</button>
+            </>
+          ) : (
+            <>
           <section className="hotel-info">
             <h3>Hotel Information</h3>
             <p>
@@ -132,11 +224,13 @@ const HotelDetails = ({ user }) => {
             <h3>Description</h3>
             <p>{HotelDetails.hotel_description}</p>
           </section>
-
+          <button onClick={() => setEditMode(true)}>Edit Hotel</button>
+          </>
+          )}
           <section>
             <h3>Hotel Amenities</h3>
             <div className="amenity-list-details">
-              {Hotelamenities.map((amenity) => (
+              {hotelAmenities.map((amenity) => (
                 <div className="amenity-card" key={amenity._id}>
                   <img
                     src={`http://localhost:3001/${amenity.amenity_icon}`}
@@ -238,7 +332,7 @@ const HotelDetails = ({ user }) => {
           )}
         </div>
       ) : (
-        <p>No hotels found.</p>
+        <p>No hotel found.</p>
       )}
     </>
   )
