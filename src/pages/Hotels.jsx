@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react"
 import axios from "axios"
 import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
-const Hotels = () => {
+const Hotels = ({ user }) => {
+  let navigate = useNavigate()
   const [hotels, setHotels] = useState([])
   const [sortOrder, setSortOrder] = useState("low-high") //useState to handle sort order
   const [sortBy, setSortBy] = useState("price") // useState to manage what to sort
+
   useEffect(() => {
     const fetchHotels = async () => {
       try {
@@ -20,6 +23,15 @@ const Hotels = () => {
 
     fetchHotels()
   }, [])
+  // Handle hotel deletion
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:3001/hotels/deleteHotel/${id}`)
+      fetchHotels() // Re-fetch the updated list after deletion
+    } catch (error) {
+      console.error("Error deleting hotel:", error)
+    }
+  }
 
   // Function to handle sorting
   const sortedHotels = [...hotels].sort((a, b) => {
@@ -38,7 +50,7 @@ const Hotels = () => {
     }
   })
 
-  return (
+  return user ? (
     <div>
       <h1>Hotels</h1>
       <div className="sort-list">
@@ -134,12 +146,21 @@ const Hotels = () => {
                   ))}
                 </div>
               </div>
+              <button onClick={() => handleDelete(hotel._id)}>Delete</button>
             </Link>
           ))}
         </div>
       ) : (
         <p>No hotels found.</p>
       )}
+    </div>
+  ) : (
+    <div
+      className=" d-flex justify-content-center align-items-center"
+      style={{ height: "100vh" }}
+    >
+      <h3>Oops! You must be signed in to do that!</h3>
+      <button onClick={() => navigate("/signin")}>Sign In</button>
     </div>
   )
 }

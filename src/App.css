@@ -178,7 +178,7 @@ select {
 }
 
 .hotel-booking p {
-  font-size: 22px;
+  font-size: 18px;
   color: #da3832;
   margin-top: 20px;
   font-weight: bold;
@@ -205,4 +205,38 @@ select {
   text-align: center;
   width: 90%;
 }
+/* END */
+
+/* For SignIn */
+.bg-form {
+  background-color: hwb(0 100% 0%);
+  width: 470px;
+  height: 400px;
+  margin: 80px auto;
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+
+  border: 1px solid #ccc;
+  border-radius: 15px;
+}
+/* END */
+
+/* Message  */
+.message {
+  position: fixed;
+  top: 16%;
+  left: 89%;
+  transform: translate(-50%, -50%);
+  width: 320px;
+  height: 50px;
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 15px 30px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  font-family: "Arial Narrow Bold", sans-serif;
+}
+
 /* END */

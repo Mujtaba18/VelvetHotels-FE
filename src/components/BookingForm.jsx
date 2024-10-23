@@ -1,6 +1,10 @@
 import React, { useState } from "react"
 import axios from "axios"
+import { useNavigate } from "react-router-dom"
 const BookingForm = ({ hotelDetails, user }) => {
+  const [message, setmessage] = useState("") // State for error message
+
+  let navigate = useNavigate()
   const initialState = {
     checkIn: "",
     checkOut: "",
@@ -17,6 +21,16 @@ const BookingForm = ({ hotelDetails, user }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+
+    // Check if checkOut is after checkIn
+    if (new Date(bookingData.checkOut) <= new Date(bookingData.checkIn)) {
+      setmessage("Check-out must be after check-in")
+      setTimeout(() => {
+        setmessage("")
+      }, 4500)
+
+      return // Do not submit
+    }
     try {
       const DataSubmited = {
         ...bookingData, // store data from the form
@@ -29,9 +43,10 @@ const BookingForm = ({ hotelDetails, user }) => {
         "http://localhost:3001/hotels/booking",
         DataSubmited
       )
-      console.log("data submited", response.data)
-
+      console.log("data", response.data)
       console.log("Booking data submitted:", bookingData)
+
+      navigate(`/hotels/mybooking`)
       setBookingData(initialState)
     } catch (error) {
       throw error
@@ -85,8 +100,8 @@ const BookingForm = ({ hotelDetails, user }) => {
             required
           />
         </label>
-
         <button type="submit">Book Now</button>
+        {message && <div className="message">{message}</div>}
       </form>
     </>
   )

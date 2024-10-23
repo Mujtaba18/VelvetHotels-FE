@@ -34,10 +34,12 @@ const Register = () => {
   }
 
   return (
-    <div className="signin col">
+    <div className="bg-form" style={{ minHeight: "530px" }}>
       <div className="card-overlay centered">
+        <h2 style={{ margin: "20px 0" }}>Join us now!</h2>
+
         <form className="col" onSubmit={handleSubmit}>
-          <div className="input-wrapper">
+          <div className="input-wrapper mb-3">
             <label htmlFor="name">Name</label>
             <input
               onChange={handleChange}
@@ -45,10 +47,11 @@ const Register = () => {
               type="text"
               placeholder="John Smith"
               value={formValues.name}
+              className="form-control"
               required
             />
           </div>
-          <div className="input-wrapper">
+          <div className="input-wrapper mb-3">
             <label htmlFor="email">Email</label>
             <input
               onChange={handleChange}
@@ -56,41 +59,58 @@ const Register = () => {
               type="email"
               placeholder="example@example.com"
               value={formValues.email}
+              className="form-control"
               required
             />
           </div>
 
-          <div className="input-wrapper">
+          <div className="input-wrapper mb-3">
             <label htmlFor="password">Password</label>
             <input
               onChange={handleChange}
               type="password"
               name="password"
               value={formValues.password}
+              className="form-control"
               required
             />
           </div>
-          <div className="input-wrapper">
+          <div className="input-wrapper mb-3">
             <label htmlFor="confirmPassword">Confirm Password</label>
             <input
               onChange={handleChange}
               type="password"
               name="confirmPassword"
               value={formValues.confirmPassword}
+              className="form-control"
               required
             />
           </div>
 
           <button
+            type="submit"
+            className="btn btn-primary btn-block mb-3"
             disabled={
               !formValues.email ||
-              (!formValues.password &&
-                formValues.confirmPassword === formValues.password)
+              !formValues.password ||
+              formValues.password !== formValues.confirmPassword
             }
           >
             Sign Up
           </button>
         </form>
+
+        <div className="text-center">
+          <h6>
+            Already have an account?
+            <a
+              onClick={() => navigate("/signin")}
+              style={{ cursor: "pointer", color: "blue" }}
+            >
+              <span> Log in here</span>
+            </a>
+          </h6>
+        </div>
       </div>
     </div>
   )

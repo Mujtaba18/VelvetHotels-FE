@@ -9,7 +9,7 @@ const HotelDetails = ({ user }) => {
   const [HotelDetails, setHotelDetails] = useState([])
   const [Hotelamenities, setHotelamenities] = useState([])
 
-  const [HotelName, setHotel] = useState("")
+  const [message, setmessage] = useState("")
 
   useEffect(() => {
     const fetchHotleData = async () => {

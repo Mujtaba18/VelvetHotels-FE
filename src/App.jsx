@@ -12,6 +12,7 @@ import { CheckSession } from "./services/Auth"
 import Amenity from "./components/Amenity"
 import Profile from "./pages/Profile"
 import BookingForm from "./components/BookingForm"
+import MyBooking from "./pages/MyBooking"
 import "./App.css"
 
 const App = () => {
@@ -47,13 +48,15 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/signin" element={<SignIn setUser={setUser} />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/hotels" element={<Hotels />} />
+          <Route path="/hotels" element={<Hotels user={user} />} />
           <Route path="/add-hotel" element={<AddHotel />} />
           <Route path="/amenities" element={<Amenity />} />
           <Route
             path="/hotels/details/:hotelId"
             element={<HotelDetails user={user} />}
           />
+          <Route path="/hotels/mybooking" element={<MyBooking user={user} />} />
+
           <Route
             path="/profile/:userId"
             element={<Profile user={user} setUser={setUser} />} // Keep it as is
