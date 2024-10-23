@@ -56,7 +56,7 @@ const HotelDetails = ({ user }) => {
             data-bs-interval="3000"
           >
             <div className="carousel-inner">
-              {Array.isArray(HotelDetails.hotel_images) && 
+              {Array.isArray(HotelDetails.hotel_images) &&
                 HotelDetails.hotel_images.map((image, index) => (
                   <div
                     key={index}
@@ -68,8 +68,7 @@ const HotelDetails = ({ user }) => {
                       alt={HotelDetails.hotel_name}
                     />
                   </div>
-                ))
-              }
+                ))}
             </div>
             <button
               className="carousel-control-prev"
@@ -150,76 +149,93 @@ const HotelDetails = ({ user }) => {
               ))}
             </div>
           </section>
+          {user ? (
+            <>
+              {user.role === "admin" ? (
+                <></>
+              ) : user.role === "user" ? (
+                <>
+                  <section className="hotel-booking">
+                    <h3>Book Hotel</h3>
+                    {HotelDetails.hotel_rooms > 0 ? (
+                      <BookingForm hotelDetails={HotelDetails} user={user} />
+                    ) : (
+                      <div className="hotel-full">
+                        <p className="hotel-booking">
+                          Sorry, the hotel is full
+                        </p>
+                      </div>
+                    )}
+                  </section>
 
-          <section className="hotel-booking">
-            <h3>Book Hotel</h3>
-            {HotelDetails.hotel_rooms > 0 ? (
-              <BookingForm hotelDetails={HotelDetails} user={user} />
-            ) : (
-              <div className="hotel-full">
-                <p className="hotel-booking">Sorry, the hotel is full</p>
-              </div>
-            )}
-          </section>
+                  <section className="hotel-reviews">
+                    <h3>Reviews</h3>
+                    {Array.isArray(HotelDetails.hotel_rating) &&
+                    HotelDetails.hotel_rating.length > 0 ? (
+                      HotelDetails.hotel_rating.map((review) => (
+                        <div key={review._id} className="review">
+                          <p>
+                            <strong>User:</strong>{" "}
+                            {review.user ? review.user.name : "Anonymous"}
+                          </p>
+                          <p>
+                            <strong>Rating:</strong> {review.rating} ⭐
+                          </p>
+                          <p>
+                            <strong>Comment:</strong>{" "}
+                            {review.comment || "No comment provided."}
+                          </p>
+                          <hr />
+                        </div>
+                      ))
+                    ) : (
+                      <p>No reviews yet.</p>
+                    )}
+                  </section>
 
-          <section className="hotel-reviews">
-            <h3>Reviews</h3>
-            {Array.isArray(HotelDetails.hotel_rating) &&
-            HotelDetails.hotel_rating.length > 0 ? (
-              HotelDetails.hotel_rating.map((review) => (
-                <div key={review._id} className="review">
-                  <p>
-                    <strong>User:</strong>{" "}
-                    {review.user ? review.user.name : "Anonymous"}
-                  </p>
-                  <p>
-                    <strong>Rating:</strong> {review.rating} ⭐
-                  </p>
-                  <p>
-                    <strong>Comment:</strong>{" "}
-                    {review.comment || "No comment provided."}
-                  </p>
-                  <hr />
-                </div>
-              ))
-            ) : (
-              <p>No reviews yet.</p>
-            )}
-          </section>
-
-          <section className="rating-form">
-            <h3>Submit Your Rating</h3>
-            <form onSubmit={handleRatingSubmit}>
-              <div className="mb-3">
-                <label htmlFor="rating">Rating:</label>
-                <input
-                  type="number"
-                  id="rating"
-                  name="rating"
-                  value={rating}
-                  onChange={(e) => setRating(e.target.value)}
-                  min="1"
-                  max="5"
-                  className="form-control"
-                  required
-                />
-              </div>
-              <div className="mb-3">
-                <label htmlFor="comment">Comment:</label>
-                <textarea
-                  id="comment"
-                  name="comment"
-                  value={comment}
-                  onChange={(e) => setComment(e.target.value)}
-                  className="form-control"
-                  required
-                />
-              </div>
-              <button type="submit" className="btn btn-primary">
-                Submit Rating
-              </button>
-            </form>
-          </section>
+                  <section className="rating-form">
+                    <h3>Submit Your Rating</h3>
+                    <form onSubmit={handleRatingSubmit}>
+                      <div className="mb-3">
+                        <label htmlFor="rating">Rating:</label>
+                        <input
+                          type="number"
+                          id="rating"
+                          name="rating"
+                          value={rating}
+                          onChange={(e) => setRating(e.target.value)}
+                          min="1"
+                          max="5"
+                          className="form-control"
+                          required
+                        />
+                      </div>
+                      <div className="mb-3">
+                        <label htmlFor="comment">Comment:</label>
+                        <textarea
+                          id="comment"
+                          name="comment"
+                          value={comment}
+                          onChange={(e) => setComment(e.target.value)}
+                          className="form-control"
+                          required
+                        />
+                      </div>
+                      <button type="submit" className="btn btn-primary">
+                        Submit Rating
+                      </button>
+                    </form>
+                  </section>
+                </>
+              ) : (
+                <p>No hotels found.</p>
+              )}
+            </>
+          ) : (
+            <div>
+              <h2>Please log in.</h2>
+            </div>
+          )}
         </div>
       ) : (
         <p>No hotels found.</p>

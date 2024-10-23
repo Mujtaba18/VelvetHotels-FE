@@ -197,114 +197,118 @@ const Hotels = ({ user }) => {
                         className="link-hotel"
                       >
                         <div className="hotels-card" key={hotel._id}>
-                          <div className="hotels-img-info">
-                            {hotel.hotel_rooms === 0 ? (
-                              <p id="hotel-isfull">Hotel is full</p>
-                            ) : null}
-                            <img
-                              className="hotels-img"
-                              src={`http://localhost:3001/${hotel.hotel_image}`}
-                              alt={hotel.hotel_name}
-                              width="300"
-                            />
-                            <div className="hotels-info">
-                              <div className="hotels-name">
-                                <h2>{hotel.hotel_name}</h2>
-                                <p>
-                                  {hotel.hotel_stars === 5 ? (
-                                    <>
-                                      <span>⭐⭐⭐⭐⭐</span>
-                                    </>
-                                  ) : hotel.hotel_stars === 4 ? (
-                                    <>
-                                      <span>⭐⭐⭐⭐</span>
-                                    </>
-                                  ) : hotel.hotel_stars === 3 ? (
-                                    <>
-                                      <span>⭐⭐⭐</span>
-                                    </>
-                                  ) : hotel.hotel_stars === 2 ? (
-                                    <>
-                                      <span>⭐⭐</span>
-                                    </>
-                                  ) : hotel.hotel_stars === 1 ? (
-                                    <span>⭐</span>
-                                  ) : (
-                                    <span>Not Rated</span>
-                                  )}
-                                </p>
-                              </div>
-                              <div
-                                id={`carousel-${hotel._id}`}
-                                className="carousel slide container"
-                                data-bs-ride="carousel"
-                                data-bs-interval="3000"
-                              >
-                                <div className="carousel-inner">
-                                  {hotel.hotel_images.map((image, index) => (
-                                    <div
-                                      key={index}
-                                      className={`carousel-item ${
-                                        index === 0 ? "active" : ""
-                                      }`}
-                                    >
-                                      <img
-                                        className="d-block"
-                                        src={`http://localhost:3001/${image}`}
-                                        alt={hotel.hotel_name}
-                                        width="200"
-                                        height="120"
-                                      />
-                                    </div>
-                                  ))}
+                          <div className="hotel-container">
+                            <div className="hotels-img-info">
+                              {hotel.hotel_rooms === 0 ? (
+                                <p id="hotel-isfull">Hotel is full</p>
+                              ) : null}
+                              <img
+                                className="hotels-img"
+                                src={`http://localhost:3001/${hotel.hotel_image}`}
+                                alt={hotel.hotel_name}
+                                width="300"
+                              />
+                              <div className="hotels-info">
+                                <div className="hotels-name">
+                                  <h2>{hotel.hotel_name}</h2>
+                                  <p>
+                                    {hotel.hotel_stars === 5 ? (
+                                      <>
+                                        <span>⭐⭐⭐⭐⭐</span>
+                                      </>
+                                    ) : hotel.hotel_stars === 4 ? (
+                                      <>
+                                        <span>⭐⭐⭐⭐</span>
+                                      </>
+                                    ) : hotel.hotel_stars === 3 ? (
+                                      <>
+                                        <span>⭐⭐⭐</span>
+                                      </>
+                                    ) : hotel.hotel_stars === 2 ? (
+                                      <>
+                                        <span>⭐⭐</span>
+                                      </>
+                                    ) : hotel.hotel_stars === 1 ? (
+                                      <span>⭐</span>
+                                    ) : (
+                                      <span>Not Rated</span>
+                                    )}
+                                  </p>
                                 </div>
-                                <button
-                                  className="carousel-control-prev"
-                                  type="button"
-                                  data-bs-target={`#carousel-${hotel._id}`}
-                                  data-bs-slide="prev"
-                                  onClick={(e) => e.stopPropagation()}
+                                <div
+                                  id={`carousel-${hotel._id}`}
+                                  className="carousel slide container"
+                                  data-bs-ride="carousel"
+                                  data-bs-interval="3000"
                                 >
-                                  <span
-                                    className="carousel-control-prev-icon"
-                                    aria-hidden="true"
-                                  ></span>
-                                </button>
-                                <button
-                                  className="carousel-control-next"
-                                  type="button"
-                                  data-bs-target={`#carousel-${hotel._id}`}
-                                  data-bs-slide="next"
-                                  onClick={(e) => e.stopPropagation()}
-                                >
-                                  <span
-                                    className="carousel-control-next-icon"
-                                    aria-hidden="true"
-                                  ></span>
-                                </button>
-                              </div>
-                              <div className="hotels-info-n">
-                                <p>
-                                  <strong>Location: </strong>{" "}
-                                  {hotel.hotel_location}
-                                </p>
-                                <p>
-                                  <strong>Price: </strong> ${hotel.hotel_price}
-                                </p>
-                                <p>
-                                  <strong>Rooms: </strong> {hotel.hotel_rooms}
-                                </p>
-                                <p>
-                                  <strong>Rating:</strong>{" "}
-                                  {hotel.hotel_rating.length > 0
-                                    ? (
-                                        hotel.hotel_rating.reduce(
-                                          (acc, review) => acc + review.rating,
-                                          0
-                                        ) / hotel.hotel_rating.length
-                                      ).toFixed(1)
-                                    : "No ratings yet"}
-                                </p>
+                                  <div className="carousel-inner">
+                                    {hotel.hotel_images.map((image, index) => (
+                                      <div
+                                        key={index}
+                                        className={`carousel-item ${
+                                          index === 0 ? "active" : ""
+                                        }`}
+                                      >
+                                        <img
+                                          className="d-block"
+                                          src={`http://localhost:3001/${image}`}
+                                          alt={hotel.hotel_name}
+                                          width="200"
+                                          height="120"
+                                        />
+                                      </div>
+                                    ))}
+                                  </div>
+                                  <button
+                                    className="carousel-control-prev"
+                                    type="button"
+                                    data-bs-target={`#carousel-${hotel._id}`}
+                                    data-bs-slide="prev"
+                                    onClick={(e) => e.stopPropagation()}
+                                  >
+                                    <span
+                                      className="carousel-control-prev-icon"
+                                      aria-hidden="true"
+                                    ></span>
+                                  </button>
+                                  <button
+                                    className="carousel-control-next"
+                                    type="button"
+                                    data-bs-target={`#carousel-${hotel._id}`}
+                                    data-bs-slide="next"
+                                    onClick={(e) => e.stopPropagation()}
+                                  >
+                                    <span
+                                      className="carousel-control-next-icon"
+                                      aria-hidden="true"
+                                    ></span>
+                                  </button>
+                                </div>
+                                <div className="hotels-info-n">
+                                  <p>
+                                    <strong>Location: </strong>{" "}
+                                    {hotel.hotel_location}
+                                  </p>
+                                  <p>
+                                    <strong>Price: </strong> $
+                                    {hotel.hotel_price}
+                                  </p>
+                                  <p>
+                                    <strong>Rooms: </strong> {hotel.hotel_rooms}
+                                  </p>
+                                  <p>
+                                    <strong>Rating:</strong>{" "}
+                                    {hotel.hotel_rating.length > 0
+                                      ? (
+                                          hotel.hotel_rating.reduce(
+                                            (acc, review) =>
+                                              acc + review.rating,
+                                            0
+                                          ) / hotel.hotel_rating.length
+                                        ).toFixed(1)
+                                      : "No ratings yet"}
+                                  </p>
+                                </div>
                               </div>
                             </div>
                           </div>

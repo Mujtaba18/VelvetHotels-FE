@@ -103,17 +103,19 @@ const BookingForm = ({ hotelDetails, user }) => {
           id="rooms"
         />
       </div>
-      <label>
-        Number Of Guests:
+      <div className="mb-3">
+      <label htmlFor="numberOfGuests" className="form-label">Number Of Guests:</label>
         <input
           type="number"
           name="numberOfGuests"
           value={bookingData.numberOfGuests}
           onChange={handleChange}
           min="1"
+          className="form-control"
           required
         />
-      </label>
+
+      </div>
       <button type="submit" className="btn btn-primary">
         Book Now
       </button>
