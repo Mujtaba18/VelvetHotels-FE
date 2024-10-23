@@ -13,7 +13,7 @@ const MyBooking = ({ user }) => {
     const fetchBooking = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3001/hotels/mybooking/${user.id}`
+          `https://velvethotels-be.onrender.com/hotels/mybooking/${user.id}`
         )
         setBookings(response.data)
         console.log(response)

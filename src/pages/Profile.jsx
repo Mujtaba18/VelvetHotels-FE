@@ -24,7 +24,7 @@ const Profile = ({ user, setUser }) => {
 
     const fetchProfile = async () => {
       try {
-        const res = await axios.get(`http://localhost:3001/profile/${user.id}`)
+        const res = await axios.get(`https://velvethotels-be.onrender.com/profile/${user.id}`)
         setUserData(res.data)
       } catch (err) {
         console.error("Error fetching profile data" + err)
@@ -55,7 +55,7 @@ const Profile = ({ user, setUser }) => {
 
     try {
       const res = await axios.put(
-        `http://localhost:3001/profile/${user.id}`,
+        `https://velvethotels-be.onrender.com/profile/${user.id}`,
         formData,
         {
           headers: {
@@ -79,7 +79,7 @@ const Profile = ({ user, setUser }) => {
       <div className="container card mt-4">
         <div className="d-flex justify-content-center my-4">
           <img
-            src={`http://localhost:3001/uploads${user.profile_picture}`}
+            src={`https://velvethotels-be.onrender.com/uploads${user.profile_picture}`}
             alt={user.profile_picture}
             className="img-fluid rounded-circle"
             style={{ width: "150px", height: "150px" }}

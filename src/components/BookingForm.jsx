@@ -40,7 +40,7 @@ const BookingForm = ({ hotelDetails, user }) => {
       }
 
       const response = await axios.post(
-        "http://localhost:3001/hotels/booking",
+        "https://velvethotels-be.onrender.com/hotels/booking",
         DataSubmited
       )
       console.log("data", response.data)

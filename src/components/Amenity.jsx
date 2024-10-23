@@ -125,7 +125,7 @@ const Amenity = () => {
               <td>
                 {amenity.amenity_icon && (
                   <img
-                    src={`http://localhost:3001/${amenity.amenity_icon}`}
+                    src={`https://velvethotels-be.onrender.com/${amenity.amenity_icon}`}
                     alt={amenity.amenity_name}
                     width="50"
                     height="50"

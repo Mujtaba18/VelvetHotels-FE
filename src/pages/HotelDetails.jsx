@@ -21,7 +21,7 @@ const HotelDetails = ({ user }) => {
     const fetchHotelData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3001/hotels/details/${hotelId}`
+          `https://velvethotels-be.onrender.com/hotels/details/${hotelId}`
         )
         setHotelDetails(response.data)
         setHotelamenities(response.data.amenities)
@@ -38,7 +38,7 @@ const HotelDetails = ({ user }) => {
   const handleRatingSubmit = async (e) => {
     e.preventDefault()
     try {
-      await axios.post(`http://localhost:3001/hotels/${hotelId}/rate`, {
+      await axios.post(`https://velvethotels-be.onrender.com/hotels/${hotelId}/rate`, {
         userId: user.id,
         rating,
         comment,
@@ -73,7 +73,7 @@ const HotelDetails = ({ user }) => {
         formData.append("hotel_image", newPic)
       }
       const res = await axios.put(
-        `http://localhost:3001/hotels/${hotelData._id}`,
+        `https://velvethotels-be.onrender.com/hotels/${hotelData._id}`,
         formData,
         {
           headers: {
@@ -109,7 +109,7 @@ const HotelDetails = ({ user }) => {
                   >
                     <img
                       className="d-block"
-                      src={`http://localhost:3001/${image}`}
+                      src={`https://velvethotels-be.onrender.com/${image}`}
                       alt={HotelDetails.hotel_name}
                     />
                   </div>
@@ -237,7 +237,7 @@ const HotelDetails = ({ user }) => {
               {hotelAmenities.map((amenity) => (
                 <div className="amenity-card" key={amenity._id}>
                   <img
-                    src={`http://localhost:3001/${amenity.amenity_icon}`}
+                    src={`https://velvethotels-be.onrender.com/${amenity.amenity_icon}`}
                     alt="AmenityIcon"
                     width="40px"
                     height="40px"

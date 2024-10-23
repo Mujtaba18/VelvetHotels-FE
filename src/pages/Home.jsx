@@ -32,7 +32,7 @@ const Home = () => {
     event.preventDefault() // Prevent default form submission
     try {
       const response = await axios.get(
-        `http://localhost:3001/hotels/search?name=${searchTerm}`
+        `https://velvethotels-be.onrender.com/hotels/search?name=${searchTerm}`
       )
       setHotels(response.data)
       console.log(response)
@@ -67,7 +67,7 @@ const Home = () => {
                   <div className="hotels-img-info">
                     <img
                       className="hotels-img"
-                      src={`http://localhost:3001/${hotel.hotel_image}`}
+                      src={`https://velvethotels-be.onrender.com/${hotel.hotel_image}`}
                       alt={hotel.hotel_name}
                       width="300"
                     />

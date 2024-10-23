@@ -1,7 +1,7 @@
 import Client from './api'
 import axios from 'axios'
 
-const API_URL = 'http://localhost:3001/amenities'
+const API_URL = 'https://velvethotels-be.onrender.com/amenities'
 
 export const addAmenity = async (formData) => {
   try {

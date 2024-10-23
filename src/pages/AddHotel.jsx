@@ -20,7 +20,7 @@ const AddHotel = () => {
     const fetchAmenities = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3001/hotels/getAmenities"
+          "https://velvethotels-be.onrender.com/hotels/getAmenities"
         )
         setAmenities(response.data)
       } catch (error) {
@@ -58,7 +58,7 @@ const AddHotel = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3001/hotels/addHotel",
+        "https://velvethotels-be.onrender.com/hotels/addHotel",
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
@@ -179,7 +179,7 @@ const AddHotel = () => {
                       id={`amenity-${amenity._id}`}
                     />
                     <img
-                      src={`http://localhost:3001/${amenity.amenity_icon}`}
+                      src={`https://velvethotels-be.onrender.com/${amenity.amenity_icon}`}
                       alt="AmenityIcon"
                       width="40px"
                       height="40px"

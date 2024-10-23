@@ -14,7 +14,7 @@ const Hotels = ({ user }) => {
     const fetchHotels = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3001/hotels/getHotels"
+          "https://velvethotels-be.onrender.com/hotels/getHotels"
         )
         setHotels(response.data)
       } catch (error) {
@@ -27,7 +27,7 @@ const Hotels = ({ user }) => {
   // Handle hotel deletion
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:3001/hotels/deleteHotel/${id}`)
+      await axios.delete(`https://velvethotels-be.onrender.com/hotels/deleteHotel/${id}`)
       setHotels(hotels.filter((hotel) => hotel._id !== id))
       alert('Hotel Deleted Succesfully!!')
     } catch (error) {
@@ -140,7 +140,7 @@ const Hotels = ({ user }) => {
                             {hotel.amenities.map((amenity) => (
                               <div key={amenity._id} className="amenity-card">
                                 <img
-                                  src={`http://localhost:3001/${amenity.amenity_icon}`}
+                                  src={`https://velvethotels-be.onrender.com/${amenity.amenity_icon}`}
                                   alt={amenity.amenity_name}
                                   width="30"
                                   height="30"
@@ -206,7 +206,7 @@ const Hotels = ({ user }) => {
                               ) : null}
                               <img
                                 className="hotels-img"
-                                src={`http://localhost:3001/${hotel.hotel_image}`}
+                                src={`https://velvethotels-be.onrender.com/${hotel.hotel_image}`}
                                 alt={hotel.hotel_name}
                                 width="300"
                               />
@@ -253,7 +253,7 @@ const Hotels = ({ user }) => {
                                       >
                                         <img
                                           className="d-block"
-                                          src={`http://localhost:3001/${image}`}
+                                          src={`https://velvethotels-be.onrender.com/${image}`}
                                           alt={hotel.hotel_name}
                                           width="200"
                                           height="120"
@@ -318,7 +318,7 @@ const Hotels = ({ user }) => {
                             {hotel.amenities.map((amenity) => (
                               <div className="amenity-card">
                                 <img
-                                  src={`http://localhost:3001/${amenity.amenity_icon}`}
+                                  src={`https://velvethotels-be.onrender.com/${amenity.amenity_icon}`}
                                   alt="AmenityIcon"
                                   width="30px"
                                   height="30px"
