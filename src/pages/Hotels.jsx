@@ -4,8 +4,10 @@ import { Link } from "react-router-dom"
 
 const Hotels = ({ user }) => {
   const [hotels, setHotels] = useState([])
-  const [sortOrder, setSortOrder] = useState("low-high") //useState to handle sort order
-  const [sortBy, setSortBy] = useState("price") // useState to manage what to sort
+  const [sortOrder, setSortOrder] = useState("low-high")
+  const [sortBy, setSortBy] = useState("price")
+  const [ratingAverage, setRatingAverage] = useState({})
+
   useEffect(() => {
     const fetchHotels = async () => {
       try {
@@ -21,20 +23,43 @@ const Hotels = ({ user }) => {
     fetchHotels()
   }, [])
 
-  // Function to handle sorting
+  useEffect(() => {
+    const calculateRatingAverages = () => {
+      const averages = hotels.reduce((acc, hotel) => {
+        const average =
+          hotel.hotel_rating.length > 0
+            ? (
+                hotel.hotel_rating.reduce(
+                  (acc, review) => acc + review.rating,
+                  0
+                ) / hotel.hotel_rating.length
+              ).toFixed(1)
+            : "No ratings yet";
+        return { ...acc, [hotel._id]: average };
+      }, {});
+
+      setRatingAverage(averages);
+    };
+
+    calculateRatingAverages();
+  }, [hotels]);
+
   const sortedHotels = [...hotels].sort((a, b) => {
     if (sortBy === "price") {
-      // Compare between them and sort based on the result
-      // In case result is negative (-), it means 'a' should come before 'b' in the sorted order.
-      // In case result is positive (+), it means 'b' should come before 'a' in the sorted order.
       return sortOrder === "low-high"
-        ? a.hotel_price - b.hotel_price // Sort by price low to high
-        : b.hotel_price - a.hotel_price // Sort by price high to low
-    } else {
-      // sortBy is rate
+        ? a.hotel_price - b.hotel_price
+        : b.hotel_price - a.hotel_price
+    } else if (sortBy === "rating") {
+      const averageRatingA = a.hotel_rating.length > 0
+        ? a.hotel_rating.reduce((acc, review) => acc + review.rating, 0) / a.hotel_rating.length
+        : 0;
+      const averageRatingB = b.hotel_rating.length > 0
+        ? b.hotel_rating.reduce((acc, review) => acc + review.rating, 0) / b.hotel_rating.length
+        : 0;
+  
       return sortOrder === "low-high"
-        ? a.hotel_rating - b.hotel_rating
-        : b.hotel_rating - a.hotel_rating
+        ? averageRatingA - averageRatingB
+        : averageRatingB - averageRatingA;
     }
   })
 
@@ -51,7 +76,7 @@ const Hotels = ({ user }) => {
                   <select
                     id="sortBy"
                     value={sortBy}
-                    onChange={(e) => setSortBy(e.target.value)} // handle change the sort
+                    onChange={(e) => setSortBy(e.target.value)}
                   >
                     <option value="price">Price</option>
                     <option value="rating">Rating</option>
@@ -60,7 +85,7 @@ const Hotels = ({ user }) => {
                   <select
                     id="sortOrder"
                     value={sortOrder}
-                    onChange={(e) => setSortOrder(e.target.value)} // handle change the order
+                    onChange={(e) => setSortOrder(e.target.value)}
                   >
                     <option value="low-high">Low to High</option>
                     <option value="high-low">High to Low</option>
@@ -94,14 +119,7 @@ const Hotels = ({ user }) => {
                           <td>${hotel.hotel_price}</td>
                           <td>{hotel.hotel_rooms}</td>
                           <td>
-                            {hotel.hotel_rating.length > 0
-                              ? (
-                                  hotel.hotel_rating.reduce(
-                                    (acc, review) => acc + review.rating,
-                                    0
-                                  ) / hotel.hotel_rating.length
-                                ).toFixed(1)
-                              : "No ratings yet"}
+                         {ratingAverage[hotel._id]}
                           </td>
                           <td>
                             {hotel.amenities.map((amenity) => (
@@ -135,7 +153,7 @@ const Hotels = ({ user }) => {
                   <select
                     id="sortBy"
                     value={sortBy}
-                    onChange={(e) => setSortBy(e.target.value)} //handel change the sort
+                    onChange={(e) => setSortBy(e.target.value)}
                   >
                     <option value="price">Price</option>
                     <option value="rating">Rating</option>
@@ -144,7 +162,7 @@ const Hotels = ({ user }) => {
                   <select
                     id="sortOrder"
                     value={sortOrder}
-                    onChange={(e) => setSortOrder(e.target.value)} //handel change the order
+                    onChange={(e) => setSortOrder(e.target.value)}
                   >
                     <option value="low-high">Low to High</option>
                     <option value="high-low">High to Low</option>
@@ -193,6 +211,57 @@ const Hotels = ({ user }) => {
                                     <span>Not Rated</span>
                                   )}
                                 </p>
+                              </div>
+                              <div
+                                id={`carousel-${hotel._id}`}
+                                className="carousel slide container"
+                                data-ride="carousel"
+                                data-interval="3000" 
+                              >
+                                <div className="carousel-inner">
+                                  {hotel.hotel_images.map((image, index) => (
+                                    <div
+                                      key={index}
+                                      className={`carousel-item ${
+                                        index === 0 ? "active" : ""
+                                      }`}
+                                    >
+                                      <img
+                                        className="d-block w-100"
+                                        src={`http://localhost:3001/${image}`}
+                                        alt={hotel.hotel_name}
+                                        width="40px"
+                                        height="100px"
+                                      />
+                                    </div>
+                                  ))}
+                                </div>
+                                <a
+                                  className="carousel-control-prev"
+                                  href={`#carousel-${hotel._id}`}
+                                  role="button"
+                                  data-slide="prev"
+                                  onClick={(e) => e.stopPropagation()} 
+                                >
+                                  <span
+                                    className="carousel-control-prev-icon"
+                                    aria-hidden="true"
+                                  ></span>
+                                  <span className="sr-only">Previous</span>
+                                </a>
+                                <a
+                                  className="carousel-control-next"
+                                  href={`#carousel-${hotel._id}`}
+                                  role="button"
+                                  data-slide="next"
+                                  onClick={(e) => e.stopPropagation()} 
+                                >
+                                  <span
+                                    className="carousel-control-next-icon"
+                                    aria-hidden="true"
+                                  ></span>
+                                  <span className="sr-only">Next</span>
+                                </a>
                               </div>
                               <div className="hotels-info-n">
                                 <p>
