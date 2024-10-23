@@ -4,8 +4,8 @@ import { Link } from "react-router-dom"
 
 const Hotels = () => {
   const [hotels, setHotels] = useState([])
-  const [sortOrder, setSortOrder] = useState("low-high") //useState to handle sort order
-  const [sortBy, setSortBy] = useState("price") // useState to manage what to sort
+  const [sortOrder, setSortOrder] = useState("low-high")
+  const [sortBy, setSortBy] = useState("price")
   useEffect(() => {
     const fetchHotels = async () => {
       try {
